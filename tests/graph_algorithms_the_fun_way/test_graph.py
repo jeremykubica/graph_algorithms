@@ -1,4 +1,4 @@
-from graph_algorithms.graph import *
+from graph_algorithms_the_fun_way.graph import *
 
 import unittest
 

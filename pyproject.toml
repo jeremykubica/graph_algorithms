@@ -1,6 +1,6 @@
 
 [project]
-name = "graph_algorithms"
+name = "graph_algorithms_the_fun_way"
 license = {file = "LICENSE"}
 readme = "README.md"
 authors = [
@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.urls]
-"Source Code" = "https://github.com/jeremykubica/graph_algorithms"
+"Source Code" = "https://github.com/jeremykubica/graph_algorithms_the_fun_way"
 
 # On a mac, install optional dependencies with `pip install '.[dev]'` (include the single quotes)
 [project.optional-dependencies]
@@ -40,7 +40,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-write_to = "src/graph_algorithms/_version.py"
+write_to = "src/graph_algorithms_the_fun_way/_version.py"
 
 [tool.pytest.ini_options]
 testpaths = [
@@ -102,4 +102,4 @@ ignore = [
 ]
 
 [tool.coverage.run]
-omit=["src/graph_algorithms/_version.py"]
+omit=["src/graph_algorithms_the_fun_way/_version.py"]
