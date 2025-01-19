@@ -1,0 +1,21 @@
+# Changes here will be overwritten by Copier
+_commit: v2.0.5
+_src_path: gh:lincc-frameworks/python-project-template
+author_email: computationaltales@gmail.com
+author_name: Jeremy Kubica
+create_example_module: false
+custom_install: true
+enforce_style:
+- black
+failure_notification: []
+include_benchmarks: false
+include_docs: false
+mypy_type_checking: none
+package_name: graph_algorithms
+project_license: MIT
+project_name: graph_algorithms
+project_organization: jeremykubica
+python_versions:
+- '3.9'
+- '3.10'
+- '3.11'
