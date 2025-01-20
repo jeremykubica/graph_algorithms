@@ -1,4 +1,5 @@
-"""
+"""The core data structures for the adjacency list representations of a graph.
+
 This module provides example code from Jeremy Kubica's book
 Graph Algorithms the Fun Way (No Starch Press 2024). As noted
 in the book the code is provided for illustration purposes only.
@@ -17,9 +18,9 @@ class Edge:
     Attributes
     ----------
     from_node : int
-        The node index from which the edge starts.
+        The node index of the edge's origin.
     to_node : int
-        The node index to which to which the edge goes.
+        The node index to the edge's destination.
     weight : float
         The weight of the edge.
     """
@@ -201,7 +202,7 @@ class Node:
 
 
 class Graph:
-    """Adjacency graph representations of a graph structure.
+    """Adjacency list representations of a graph structure.
 
     Attributes
     ----------
@@ -246,9 +247,9 @@ class Graph:
         Parameters
         ----------
         from_node : int
-            The node index from which the edge starts.
+            The node index of the edge's origin.
         to_node : int
-            The node index to which to which the edge goes.
+            The node index to the edge's destination.
         weight : float
             The weight of the edge.
         """
@@ -267,9 +268,9 @@ class Graph:
         Parameters
         ----------
         from_node : int
-            The node index from which the edge starts.
+            The node index of the edge's origin.
         to_node : int
-            The node index to which to which the edge goes.
+            The node index to the edge's destination.
         """
         if from_node < 0 or from_node >= self.num_nodes:
             raise IndexError
@@ -304,9 +305,9 @@ class Graph:
         Parameters
         ----------
         from_node : int
-            The node index from which the edge starts.
+            The node index of the edge's origin.
         to_node : int
-            The node index to which to which the edge goes.
+            The node index to the edge's destination.
 
         Returns
         -------
@@ -326,9 +327,9 @@ class Graph:
         Parameters
         ----------
         from_node : int
-            The node index from which the edge starts.
+            The node index of the edge's origin.
         to_node : int
-            The node index to which to which the edge goes.
+            The node index to the edge's destination.
 
         Returns
         -------
@@ -453,7 +454,7 @@ class Graph:
             n.label = None
 
     def print_matrix(self):
-        """Display the node as an adjacency matrix."""
+        """Display the graph as an adjacency matrix."""
         for j in range(self.num_nodes):
             s = ""
             for k in range(self.num_nodes):
@@ -461,7 +462,7 @@ class Graph:
             print(s)
 
     def print_adj_list(self):
-        """Display the node in adjacency list format."""
+        """Display the graph in adjacency list format."""
         for j in range(self.num_nodes):
             n = self.nodes[j]
             s = "%2i:" % j
