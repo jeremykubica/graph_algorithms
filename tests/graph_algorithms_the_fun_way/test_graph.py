@@ -591,6 +591,26 @@ class TestGraph(unittest.TestCase):
         with self.assertRaises(ValueError):
             g_sub = g5.make_undirected_neighborhood_subgraph(1, True)
 
+    def test_make_graph_from_edges(self):
+        """Test that we can construct a graph from a list of edges."""
+        edge_list = [Edge(0, 1, 1.0), Edge(1, 3, 10.0), Edge(2, 4, 5.0), Edge(3, 1, 2.0), Edge(1, 2, 3.0)]
+        g = make_graph_from_edges(5, False, edge_list)
+        self.assertEqual(g.num_nodes, 5)
+
+        edges = [(0, 1), (1, 3), (2, 4), (3, 1), (1, 2)]
+        for i in range(5):
+            for j in range(5):
+                if (i, j) in edges:
+                    self.assertTrue(g.is_edge(i, j))
+                else:
+                    self.assertFalse(g.is_edge(i, j))
+
+        self.assertAlmostEqual(g.get_edge(0, 1).weight, 1.0)
+        self.assertAlmostEqual(g.get_edge(1, 3).weight, 10.0)
+        self.assertAlmostEqual(g.get_edge(2, 4).weight, 5.0)
+        self.assertAlmostEqual(g.get_edge(3, 1).weight, 2.0)
+        self.assertAlmostEqual(g.get_edge(1, 2).weight, 3.0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -539,6 +539,30 @@ class Graph:
         return g2
 
 
+def make_graph_from_edges(num_nodes: int, undirected: bool, edge_list: list) -> Graph:
+    """Make a graph from a list of edges (from Appendix A).
+
+    Parameters
+    ----------
+    num_nodes : int
+        The total number of nodes in the graph.
+    undirected : bool
+        A Boolean indicating whether the graph is undirected (True) or
+        directed (False).
+    edge_list : list of Edge
+        The list of edges to add.
+
+    Returns
+    -------
+    g : Graph
+        The constructed Graph.
+    """
+    g: Graph = Graph(num_nodes, undirected)
+    for edge in edge_list:
+        g.insert_edge(edge.from_node, edge.to_node, edge.weight)
+    return g
+
+
 def make_transpose_graph(g: Graph) -> Graph:
     """Create the transpose of a directed graph.
 

@@ -1,10 +1,16 @@
 import unittest
 
-from graph_algorithms_the_fun_way.grid_graphs import make_grid_graph, make_grid_with_obstacles
+from graph_algorithms_the_fun_way.graph import make_graph_from_edges
+from graph_algorithms_the_fun_way.grid_graphs import (
+    make_grid_graph,
+    make_grid_with_obstacles,
+    randomized_kruskals,
+)
+from graph_algorithms_the_fun_way.mst import compute_sum_weights, is_spanning_tree
 from graph_algorithms_the_fun_way.search import breadth_first_search
 
 
-class TestMaze(unittest.TestCase):
+class TestGrid(unittest.TestCase):
     def test_make_grid(self):
         """Construct an empty 3 x 4 grid."""
         w = 3
@@ -117,6 +123,44 @@ class TestMaze(unittest.TestCase):
                             self.assertTrue(g.is_edge(ind1, ind2))
                         else:
                             self.assertFalse(g.is_edge(ind1, ind2))
+
+
+class TestMaze(unittest.TestCase):
+    def test_small(self):
+        """Test a bunch of small mazes of various sizes."""
+        for w in range(1, 5):
+            for h in range(1, 5):
+                for i in range(20):
+                    g = make_grid_graph(w, h)
+                    maze_edges = randomized_kruskals(g)
+
+                    # Check that we have a minimum spanning tree.
+                    self.assertTrue(is_spanning_tree(g, maze_edges))
+                    self.assertEqual(compute_sum_weights(maze_edges), (float)(w * h - 1))
+
+                    # Check there is a path back to the start from all points
+                    # (all points are reachable).
+                    maze_graph = make_graph_from_edges(g.num_nodes, True, maze_edges)
+                    last = breadth_first_search(maze_graph, 0)
+                    for i in range(1, len(last)):
+                        self.assertNotEqual(last[i], -1)
+
+    def test_large(self):
+        """Test creating bunch of larger mazes."""
+        for i in range(100):
+            g = make_grid_graph(11, 9)
+            maze_edges = randomized_kruskals(g)
+
+            # Check that we have a minimum spanning tree.
+            self.assertTrue(is_spanning_tree(g, maze_edges))
+            self.assertEqual(compute_sum_weights(maze_edges), (float)(11 * 9 - 1))
+
+            # Check there is a path back to the start from all points
+            # (all points are reachable).
+            maze_graph = make_graph_from_edges(g.num_nodes, True, maze_edges)
+            last = breadth_first_search(maze_graph, 0)
+            for i in range(1, len(last)):
+                self.assertNotEqual(last[i], -1)
 
 
 if __name__ == "__main__":

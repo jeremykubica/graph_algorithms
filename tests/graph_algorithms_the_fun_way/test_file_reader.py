@@ -4,13 +4,12 @@ import unittest
 
 from graph_algorithms_the_fun_way.file_reader import (
     make_graph_from_dependencies,
-    make_graph_from_edges,
     make_graph_from_multi_csv,
     make_graph_from_weighted_csv,
     make_graph_from_weighted_csv2,
     save_graph_to_csv,
 )
-from graph_algorithms_the_fun_way.graph import Edge, Graph
+from graph_algorithms_the_fun_way.graph import Graph
 
 
 class TestFileReaders(unittest.TestCase):
@@ -18,26 +17,6 @@ class TestFileReaders(unittest.TestCase):
     def setUp(self):
         """Create the location of the test data directory."""
         self._test_data_dir = Path(__file__).parent / "test_data"
-
-    def test_make_graph_from_edges(self):
-        """Test that we can construct a graph from a list of edges."""
-        edge_list = [Edge(0, 1, 1.0), Edge(1, 3, 10.0), Edge(2, 4, 5.0), Edge(3, 1, 2.0), Edge(1, 2, 3.0)]
-        g = make_graph_from_edges(5, False, edge_list)
-        self.assertEqual(g.num_nodes, 5)
-
-        edges = [(0, 1), (1, 3), (2, 4), (3, 1), (1, 2)]
-        for i in range(5):
-            for j in range(5):
-                if (i, j) in edges:
-                    self.assertTrue(g.is_edge(i, j))
-                else:
-                    self.assertFalse(g.is_edge(i, j))
-
-        self.assertAlmostEqual(g.get_edge(0, 1).weight, 1.0)
-        self.assertAlmostEqual(g.get_edge(1, 3).weight, 10.0)
-        self.assertAlmostEqual(g.get_edge(2, 4).weight, 5.0)
-        self.assertAlmostEqual(g.get_edge(3, 1).weight, 2.0)
-        self.assertAlmostEqual(g.get_edge(1, 2).weight, 3.0)
 
     def test_weighted_csv(self):
         """Test that we can read an undirected graph from a csv file."""

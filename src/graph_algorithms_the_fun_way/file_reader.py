@@ -14,30 +14,6 @@ from typing import Union
 from graph_algorithms_the_fun_way.graph import Edge, Graph, Node
 
 
-def make_graph_from_edges(num_nodes: int, undirected: bool, edge_list: list) -> Graph:
-    """Make a graph from a list of edges.
-
-    Parameters
-    ----------
-    num_nodes : int
-        The total number of nodes in the graph.
-    undirected : bool
-        A Boolean indicating whether the graph is undirected (True) or
-        directed (False).
-    edge_list : list of Edge
-        The list of edges to add.
-
-    Returns
-    -------
-    g : Graph
-        The constructed Graph.
-    """
-    g: Graph = Graph(num_nodes, undirected)
-    for edge in edge_list:
-        g.insert_edge(edge.from_node, edge.to_node, edge.weight)
-    return g
-
-
 def make_graph_from_weighted_csv(filename: str, undirected: bool) -> Graph:
     """Read a graph from a (weighted) CSV file.
 
