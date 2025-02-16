@@ -1,4 +1,4 @@
-"""Functions for computing the clustering coefficients.
+"""Functions for computing the clustering coefficients (Chapter 2).
 
 This module provides example code from Jeremy Kubica's book
 Graph Algorithms the Fun Way (No Starch Press 2024). As noted

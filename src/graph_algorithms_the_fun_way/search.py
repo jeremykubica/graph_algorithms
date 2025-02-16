@@ -1,4 +1,5 @@
-"""Common graph search algorithms.
+"""Common graph search algorithms: BFS (Chapter 5), DFS (Chapter 4),
+Greedy (Chapter 8), and A* (Chapter 8).
 
 This module provides example code from Jeremy Kubica's book
 Graph Algorithms the Fun Way (No Starch Press 2024). As noted

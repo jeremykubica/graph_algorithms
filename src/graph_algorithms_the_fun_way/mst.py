@@ -1,4 +1,4 @@
-"""Algorithms for finding and testing minimum spanning trees.
+"""Algorithms for finding and testing minimum spanning trees (Chapter 10).
 
 This module provides example code from Jeremy Kubica's book
 Graph Algorithms the Fun Way (No Starch Press 2024). As noted
