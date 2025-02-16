@@ -13,6 +13,7 @@ import math
 from typing import Union
 
 from graph_algorithms_the_fun_way.graph import Edge, Graph
+from graph_algorithms_the_fun_way.search import dfs_connected_components
 
 
 # -------------------------------------------------------
@@ -260,3 +261,168 @@ def make_node_path_from_last(last: list, dest: int) -> list:
 
     path: list = list(reversed(reverse_path))
     return path
+
+
+# -------------------------------------------------------
+# --- Functions for Hamiltonian Paths -------------------
+# -------------------------------------------------------
+
+
+def is_hamiltonian_path(g: Graph, path: list) -> bool:
+    """Checks whether a path is a valid Hamiltonian cycle.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+    path : list of int
+        For each node the index of the node preceding it on the path.
+
+    Returns
+    -------
+    result : bool
+        True if the path is a Hamiltonian cycle and False otherwise.
+    """
+    num_nodes: int = len(path)
+    if num_nodes != g.num_nodes:
+        return False
+
+    visited: list = [False] * g.num_nodes
+    prev_node: int = path[0]
+    visited[prev_node] = True
+
+    for step in range(1, num_nodes):
+        next_node: int = path[step]
+
+        if not g.is_edge(prev_node, next_node):
+            return False
+        if visited[next_node]:
+            return False
+
+        visited[next_node] = True
+        prev_node = next_node
+
+    return True
+
+
+# -------------------------------------------------------
+# --- Functions for Eulerian Paths ----------------------
+# -------------------------------------------------------
+
+
+# Works if the graph is fully connected and undirected
+def has_eulerian_cycle(g: Graph) -> bool:
+    """Checks whether a graph has a valid Eulerian cycle.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+
+    Returns
+    -------
+    result : bool
+        True if the graph contains a Eulerian cycle and False otherwise.
+    """
+    components: list = dfs_connected_components(g)
+    for i in range(g.num_nodes):
+        if components[i] != 0:
+            return False
+
+        degree: int = g.nodes[i].num_edges()
+        if i in g.nodes[i].edges:
+            degree += 1
+        if degree % 2 == 1:
+            return False
+    return True
+
+
+def is_eulerian_cycle(g: Graph, path: list) -> bool:
+    """Checks whether a path is a valid Eulerian cycle.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+    path : list of int
+        For each node the index of the node preceding it on the path.
+
+    Returns
+    -------
+    result : bool
+        True if the path is a Eulerian cycle and False otherwise.
+    """
+    num_nodes: int = len(path)
+    if num_nodes == 0:
+        return g.num_nodes == 0
+
+    used: dict = {}
+    for node in g.nodes:
+        for edge in node.get_edge_list():
+            used[(edge.from_node, edge.to_node)] = False
+
+    prev_node: int = path[0]
+    for step in range(1, num_nodes):
+        next_node: int = path[step]
+        if not g.is_edge(prev_node, next_node):
+            return False
+        if used[(prev_node, next_node)]:
+            return False
+
+        used[(prev_node, next_node)] = True
+        if g.undirected:
+            used[(next_node, prev_node)] = True
+
+        prev_node = next_node
+
+    for value in used.values():
+        if not value:
+            return False
+    return path[0] == path[-1]
+
+
+def hierholzers(g: Graph) -> Union[list, None]:
+    """Hierholzers algorithm for finding Eulerian cycles.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+
+    Returns
+    -------
+    full_cycle : list of int
+        A list of node indices representing the Eulerian cycle.
+    """
+    if not has_eulerian_cycle(g):
+        return None
+
+    g_r: Graph = g.make_copy()
+    options: set = set([0])
+    full_cycle: list = [0]
+
+    while len(options) > 0:
+        start: int = options.pop()
+        current: int = start
+        subcycle: list = [start]
+
+        while current != start or len(subcycle) == 1:
+            neighbor: int = list(g_r.nodes[current].edges.keys())[0]
+            subcycle.append(neighbor)
+            g_r.remove_edge(current, neighbor)
+
+            new_num_edges: int = g_r.nodes[current].num_edges()
+            if new_num_edges > 0:
+                options.add(current)
+            elif new_num_edges == 0 and current in options:
+                options.remove(current)
+
+            current = neighbor
+
+        if g_r.nodes[start].num_edges() == 0 and start in options:
+            options.remove(start)
+
+        loc: int = full_cycle.index(start)
+        full_cycle = full_cycle[0:loc] + subcycle + full_cycle[loc + 1 :]
+
+    return full_cycle

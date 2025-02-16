@@ -7,6 +7,10 @@ from graph_algorithms_the_fun_way.paths import (
     check_node_path_valid,
     compute_path_cost,
     edge_path_to_node_path,
+    has_eulerian_cycle,
+    hierholzers,
+    is_eulerian_cycle,
+    is_hamiltonian_path,
     node_path_to_edge_path,
     make_node_path_from_last,
 )
@@ -314,6 +318,343 @@ class TestGrapPaths(unittest.TestCase):
     def test_check_path_cost_figure_3_6(self):
         """Test that we can compute path costs the graph from Figure 3.6"""
         self.assertEqual(compute_path_cost(self.g6, [0, 3, 4, 2]), 9.0)
+
+    # --- Functions for Hamiltonian Paths ----------------------
+    def test_check_hamiltonian_path_1(self):
+        self.assertEqual(is_hamiltonian_path(self.g1, []), False)
+        self.assertEqual(is_hamiltonian_path(self.g1, [0]), True)
+
+    def test_check_hamiltonian_path_3(self):
+        self.assertEqual(is_hamiltonian_path(self.g3, []), False)
+        self.assertEqual(is_hamiltonian_path(self.g3, [0]), False)
+        self.assertEqual(is_hamiltonian_path(self.g3, [0, 1, 2]), True)
+        self.assertEqual(is_hamiltonian_path(self.g3, [2, 0, 1, 2]), False)
+        self.assertEqual(is_hamiltonian_path(self.g3, [2, 0, 1]), True)
+        self.assertEqual(is_hamiltonian_path(self.g3, [2, 0, 1, 2]), False)
+        self.assertEqual(is_hamiltonian_path(self.g3, [2, 0]), False)
+
+    def test_check_hamiltonian_path_4(self):
+        self.assertEqual(is_hamiltonian_path(self.g4, []), False)
+        self.assertEqual(is_hamiltonian_path(self.g4, [0]), False)
+        self.assertEqual(is_hamiltonian_path(self.g4, [0, 1, 2]), False)
+        self.assertEqual(is_hamiltonian_path(self.g4, [2, 0, 1, 3]), True)
+        self.assertEqual(is_hamiltonian_path(self.g4, [3, 1, 0, 2]), True)
+        self.assertEqual(is_hamiltonian_path(self.g4, [3, 1, 2, 0]), False)
+        self.assertEqual(is_hamiltonian_path(self.g4, [0, 1, 3, 2, 0]), False)
+
+    def test_check_hamiltonian_path_5(self):
+        self.assertEqual(is_hamiltonian_path(self.g5, [0]), False)
+        self.assertEqual(is_hamiltonian_path(self.g5, [2, 0, 1]), False)
+        self.assertEqual(is_hamiltonian_path(self.g5, [1, 0, 2, 3, 4]), True)
+        self.assertEqual(is_hamiltonian_path(self.g5, [3, 4, 1, 0, 2]), True)
+        self.assertEqual(is_hamiltonian_path(self.g5, [0, 2, 1, 3, 4]), False)
+        self.assertEqual(is_hamiltonian_path(self.g5, [0, 2, 3, 1, 3, 4]), False)
+
+    # --- Functions for Eulerian Paths ----------------------
+    def test_check_eulerian_cycle(self):
+        """Test the is_eulerian_cycle() check."""
+        self.assertEqual(is_eulerian_cycle(self.g1, []), False)
+        self.assertEqual(is_eulerian_cycle(self.g1, [0]), True)
+
+        g1 = Graph(1, undirected=False)
+        g1.insert_edge(0, 0, 1.0)
+
+        self.assertEqual(is_eulerian_cycle(g1, []), False)
+        self.assertEqual(is_eulerian_cycle(g1, [0]), False)
+        self.assertEqual(is_eulerian_cycle(g1, [0, 0]), True)
+
+        self.assertEqual(is_eulerian_cycle(self.g2, []), False)
+        self.assertEqual(is_eulerian_cycle(self.g2, [0]), False)
+        self.assertEqual(is_eulerian_cycle(self.g2, [0, 1]), False)
+        self.assertEqual(is_eulerian_cycle(self.g2, [1, 0]), False)
+        self.assertEqual(is_eulerian_cycle(self.g2, [1, 0, 1]), False)
+
+        self.assertEqual(is_eulerian_cycle(self.g3, []), False)
+        self.assertEqual(is_eulerian_cycle(self.g3, [0]), False)
+        self.assertEqual(is_eulerian_cycle(self.g3, [0, 1, 2]), False)
+        self.assertEqual(is_eulerian_cycle(self.g3, [2, 0, 1, 2]), True)
+        self.assertEqual(is_eulerian_cycle(self.g3, [2, 0, 1]), False)
+        self.assertEqual(is_eulerian_cycle(self.g3, [2, 0, 1, 1, 2]), False)
+        self.assertEqual(is_eulerian_cycle(self.g3, [2, 0, 1, 2]), True)
+
+        self.assertEqual(is_eulerian_cycle(self.g4, []), False)
+        self.assertEqual(is_eulerian_cycle(self.g4, [0]), False)
+        self.assertEqual(is_eulerian_cycle(self.g4, [0, 1, 3, 2]), False)
+        self.assertEqual(is_eulerian_cycle(self.g4, [0, 1, 3, 2, 0, 2, 3, 1, 0]), True)
+        self.assertEqual(is_eulerian_cycle(self.g4, [1, 0, 2, 3, 1, 3, 2, 0, 1]), True)
+
+        self.assertEqual(is_eulerian_cycle(self.g5, [0]), False)
+        self.assertEqual(is_eulerian_cycle(self.g5, [0, 1, 2]), False)
+        self.assertEqual(is_eulerian_cycle(self.g5, [0, 1, 0, 2, 3, 1, 3, 4]), False)
+        self.assertEqual(is_eulerian_cycle(self.g5, [0, 1, 0, 2, 3, 1, 3, 4, 1]), False)
+        self.assertEqual(is_eulerian_cycle(self.g5, [0, 1, 0, 2, 3, 1, 3, 4, 1, 0]), False)
+
+    def test_has_eulerian_cycle_3(self):
+        """Test has_eulerian_cycle()."""
+        g = Graph(3, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        g.insert_edge(1, 2, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        g.insert_edge(2, 0, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+        # Self loop
+        g.insert_edge(1, 1, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+    def test_has_eulerian_cycle_4(self):
+        """Test has_eulerian_cycle()."""
+        g = Graph(4, undirected=True)
+        g.insert_edge(1, 0, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 3, 1.0)
+
+        # Figure 18-9
+        self.assertFalse(has_eulerian_cycle(g))
+
+        g.insert_edge(0, 3, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        g.insert_edge(2, 3, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        g.remove_edge(1, 3)
+        self.assertTrue(has_eulerian_cycle(g))
+
+    def test_has_eulerian_cycle_5(self):
+        """Test has_eulerian_cycle()."""
+        # Multiple singletons
+        g = Graph(5, undirected=True)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(2, 3, 1.0)
+        g.insert_edge(3, 1, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 3, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        # Fully connected
+        g.insert_edge(1, 4, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+        # Add a self-loop.
+        g.insert_edge(0, 0, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+    def test_has_eulerian_cycle_6b(self):
+        """Test has_eulerian_cycle()."""
+        # Make graph out of two disjoint components
+        # where all nodes have even degree.
+        g = Graph(6, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(2, 0, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(4, 5, 1.0)
+        g.insert_edge(5, 3, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        # Connect the components, but make nodes odd degree.
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(2, 4, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        # Make valid.
+        g.insert_edge(2, 3, 1.0)
+        g.insert_edge(1, 4, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+    def test_has_eulerian_cycle_6(self):
+        """Test has_eulerian_cycle()."""
+        g = Graph(6, undirected=True)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(1, 5, 1.0)
+        g.insert_edge(2, 5, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(4, 5, 1.0)
+        self.assertFalse(has_eulerian_cycle(g))
+
+        path = hierholzers(g)
+        self.assertIsNone(path)
+
+        g.insert_edge(3, 5, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+        # Add self loop
+        g.insert_edge(4, 4, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+        # Add second self loop
+        g.insert_edge(2, 2, 1.0)
+        self.assertTrue(has_eulerian_cycle(g))
+
+    def test_hierholzers_3(self):
+        """Test Hierholzer's algorithm."""
+        path = hierholzers(self.g3)
+        self.assertTrue(is_eulerian_cycle(self.g3, path))
+
+    def test_hierholzers_4(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(4, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(2, 3, 1.0)
+        g.insert_edge(3, 0, 1.0)
+
+        path = hierholzers(g)
+        self.assertEqual(path, [0, 1, 2, 3, 0])
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+        # Insert self-loop
+        g.insert_edge(2, 2, 1.0)
+
+        path = hierholzers(g)
+        self.assertEqual(path, [0, 1, 2, 2, 3, 0])
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+    def test_hierholzers_6(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(6, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(1, 5, 1.0)
+        g.insert_edge(2, 5, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(4, 5, 1.0)
+
+        path = hierholzers(g)
+        self.assertIsNone(path)
+
+        g.insert_edge(3, 5, 1.0)
+
+        # Graph from 18-8
+        path = hierholzers(g)
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+    def test_hierholzers_6b(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(6, undirected=True)
+        g.insert_edge(0, 3, 1.0)  # Different edge order
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(1, 5, 1.0)
+        g.insert_edge(2, 5, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(4, 5, 1.0)
+        g.insert_edge(3, 5, 1.0)
+
+        path = hierholzers(g)
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+    def test_hierholzers_7a(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(7, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(2, 0, 1.0)
+
+        # subloop
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(4, 1, 1.0)
+
+        # subsubloop
+        g.insert_edge(4, 5, 1.0)
+        g.insert_edge(5, 6, 1.0)
+        g.insert_edge(6, 4, 1.0)
+
+        path = hierholzers(g)
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+    def test_hierholzers_7b(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(7, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(2, 0, 1.0)
+
+        # subloop 1
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(4, 1, 1.0)
+
+        # subloop 2
+        g.insert_edge(2, 5, 1.0)
+        g.insert_edge(5, 6, 1.0)
+        g.insert_edge(6, 2, 1.0)
+
+        path = hierholzers(g)
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+    def test_hierholzers_8a(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(8, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 2, 1.0)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(0, 4, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(2, 4, 1.0)
+        g.insert_edge(2, 5, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(3, 6, 1.0)
+        g.insert_edge(3, 7, 1.0)
+        g.insert_edge(4, 7, 1.0)
+        g.insert_edge(5, 7, 1.0)
+
+        path = hierholzers(g)
+        self.assertIsNone(path)
+
+        g.insert_edge(6, 7, 1.0)
+
+        path = hierholzers(g)
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+    def test_hierholzers_8b(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(8, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 2, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(1, 4, 1.0)
+        g.insert_edge(3, 4, 1.0)
+        g.insert_edge(3, 5, 1.0)
+        g.insert_edge(3, 6, 1.0)
+        g.insert_edge(5, 6, 1.0)
+        g.insert_edge(2, 4, 1.0)
+        g.insert_edge(2, 7, 1.0)
+        g.insert_edge(4, 7, 1.0)
+
+        path = hierholzers(g)
+        self.assertEqual(path, [0, 1, 3, 5, 6, 3, 4, 1, 2, 4, 7, 2, 0])
+        self.assertTrue(is_eulerian_cycle(g, path))
+
+    def test_hierholzers_5(self):
+        """Test Hierholzer's algorithm."""
+        g = Graph(5, undirected=True)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 2, 1.0)
+        g.insert_edge(0, 4, 1.0)
+        g.insert_edge(1, 3, 1.0)
+        g.insert_edge(2, 3, 1.0)
+        g.insert_edge(3, 4, 1.0)
+
+        path = hierholzers(g)
+        self.assertEqual(path, [0, 3, 2, 0, 4, 3, 1, 0])
+        self.assertTrue(is_eulerian_cycle(g, path))
 
 
 if __name__ == "__main__":
