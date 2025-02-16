@@ -1,6 +1,6 @@
 import unittest
 
-from graph_algorithms_the_fun_way.grid import make_grid_graph, make_grid_with_obstacles
+from graph_algorithms_the_fun_way.grid_graphs import make_grid_graph, make_grid_with_obstacles
 from graph_algorithms_the_fun_way.search import breadth_first_search
 
 
