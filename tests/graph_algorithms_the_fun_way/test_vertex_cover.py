@@ -5,7 +5,6 @@ from graph_algorithms_the_fun_way.vertex_cover import *
 
 
 class TestGraphVertexCover(unittest.TestCase):
-
     def setUp(self):
         """Create common test graphs."""
         self.g4 = Graph(4, undirected=True)

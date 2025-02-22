@@ -100,7 +100,7 @@ def save_graph_to_csv(g: Graph, filename: str):
     g : Graph
         The Graph to save.
     filename : str
-        The name of the file to read.
+        The name of the file to which to write the graph.
     """
     with open(filename, "w", newline="\n") as f:
         graph_writer = csv.writer(f, delimiter=",")
