@@ -269,19 +269,19 @@ def make_node_path_from_last(last: list, dest: int) -> list:
 
 
 def is_hamiltonian_path(g: Graph, path: list) -> bool:
-    """Checks whether a path is a valid Hamiltonian cycle.
+    """Checks whether a path is a valid Hamiltonian path.
 
     Parameters
     ----------
     g : Graph
         The input graph.
     path : list of int
-        For each node the index of the node preceding it on the path.
+        The list of node indices in the order in which they are visited.
 
     Returns
     -------
     result : bool
-        True if the path is a Hamiltonian cycle and False otherwise.
+        True if the path is a Hamiltonian path and False otherwise.
     """
     num_nodes: int = len(path)
     if num_nodes != g.num_nodes:
@@ -303,6 +303,140 @@ def is_hamiltonian_path(g: Graph, path: list) -> bool:
         prev_node = next_node
 
     return True
+
+
+def hamiltonian_dfs_rec(g: Graph, current: int, path: list, seen: list) -> Union[list, None]:
+    """The recursive function for the DFS search for Hamiltonian paths.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+    current : int
+        The index of the current node.
+    path : list of int
+        The nodes visited so far.
+    seen : list of bool
+        Whether each node in the graph has been marked seen.
+
+    Returns
+    -------
+    path : list or None
+        Returns the path if there is one found down this branch and None otherwise.
+    """
+    path.append(current)
+    seen[current] = True
+
+    if len(path) == g.num_nodes:
+        return path
+
+    for edge in g.nodes[current].get_edge_list():
+        n: int = edge.to_node
+        if not seen[n]:
+            result: Union[list, None] = hamiltonian_dfs_rec(g, n, path, seen)
+            if result is not None:
+                return result
+
+    _ = path.pop()
+    seen[current] = False
+    return None
+
+
+def hamiltonian_dfs(g: Graph) -> Union[list, None]:
+    """The outer wrapper function for the depth-first search for Hamiltonian paths.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+
+    Returns
+    -------
+    path : list or None
+        Returns the path if there is one found and None otherwise.
+    """
+    seen: list = [False] * g.num_nodes
+    for start in range(g.num_nodes):
+        path: Union[list, None] = hamiltonian_dfs_rec(g, start, [], seen)
+        if path is not None:
+            return path
+    return None
+
+
+# -------------------------------------------------------
+# --- Functions for the Traveling Sales Person ----------
+# -------------------------------------------------------
+
+
+def tsp_dfs_rec(g: Graph, path: list, seen: list, cost: float) -> tuple:
+    """The recursive function for the DFS search for a TSP path.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+    path : list of int
+        The nodes visited so far.
+    seen : list of bool
+        Whether each node in the graph has been marked seen.
+    cost : float
+        The current cost.
+
+    Returns
+    -------
+    (best_score, best_path) : tuple of (float, list)
+        The cost of the best path found so far and the actual path.
+    """
+    current: int = path[-1]
+
+    if len(path) == g.num_nodes:
+        last_edge: Union[Edge, None] = g.get_edge(current, path[0])
+        if last_edge is not None:
+            return (cost + last_edge.weight, path + [path[0]])
+        else:
+            return (math.inf, [])
+
+    best_path: list = []
+    best_score: float = math.inf
+    for edge in g.nodes[current].get_edge_list():
+        n: int = edge.to_node
+        if not seen[n]:
+            seen[n] = True
+            path.append(n)
+
+            result: tuple = tsp_dfs_rec(g, path, seen, cost + edge.weight)
+            seen[n] = False
+            _ = path.pop()
+
+            if result[0] < best_score:
+                best_score = result[0]
+                best_path = result[1]
+
+    return (best_score, best_path)
+
+
+def tsp_dfs(g: Graph) -> tuple:
+    """The outer wrapper function for the depth-first search for
+    a traveling sales person path.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+
+    Returns
+    -------
+    (best_score, best_path) : tuple of (float, list)
+        The cost of the best path found so far and the actual path.
+    """
+    if g.num_nodes == 1:
+        return (0.0, [0])
+
+    seen: list = [False] * g.num_nodes
+    path: list = [0]
+    seen[0] = True
+
+    return tsp_dfs_rec(g, path, seen, 0.0)
 
 
 # -------------------------------------------------------

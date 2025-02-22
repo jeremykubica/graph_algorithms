@@ -1,19 +1,7 @@
 import unittest
 
 from graph_algorithms_the_fun_way.graph import Edge, Graph
-from graph_algorithms_the_fun_way.paths import (
-    check_edge_path_valid,
-    check_last_path_valid,
-    check_node_path_valid,
-    compute_path_cost,
-    edge_path_to_node_path,
-    has_eulerian_cycle,
-    hierholzers,
-    is_eulerian_cycle,
-    is_hamiltonian_path,
-    node_path_to_edge_path,
-    make_node_path_from_last,
-)
+from graph_algorithms_the_fun_way.paths import *
 
 
 class TestGrapPaths(unittest.TestCase):
@@ -348,6 +336,243 @@ class TestGrapPaths(unittest.TestCase):
         self.assertEqual(is_hamiltonian_path(self.g5, [3, 4, 1, 0, 2]), True)
         self.assertEqual(is_hamiltonian_path(self.g5, [0, 2, 1, 3, 4]), False)
         self.assertEqual(is_hamiltonian_path(self.g5, [0, 2, 3, 1, 3, 4]), False)
+
+    def test_hamilton_dfs_1(self):
+        """Test a DFS to find Hamiltonian paths."""
+        res = hamiltonian_dfs(self.g1)
+        self.assertEqual(res, [0])
+
+    def test_hamilton_dfs_3(self):
+        """Test a DFS to find Hamiltonian paths."""
+        res = hamiltonian_dfs(self.g3)
+        self.assertEqual(res, [0, 1, 2])
+
+    def test_hamilton_dfs_3b(self):
+        """Test a DFS to find Hamiltonian paths."""
+        g3b = Graph(3, undirected=True)
+        g3b.insert_edge(0, 1, 1.0)
+        g3b.insert_edge(0, 2, 2.0)
+
+        res = hamiltonian_dfs(g3b)
+        self.assertEqual(res, [1, 0, 2])
+
+    def test_hamilton_dfs_4(self):
+        """Test a DFS to find Hamiltonian paths."""
+        res = hamiltonian_dfs(self.g4)
+        self.assertEqual(res, [0, 1, 3, 2])
+
+    def test_hamilton_dfs_4b(self):
+        """Test a DFS to find Hamiltonian paths."""
+        g4b = Graph(4, undirected=True)
+        g4b.insert_edge(0, 1, 5.0)
+        g4b.insert_edge(1, 2, 6.0)
+        g4b.insert_edge(1, 3, 2.0)
+        res = hamiltonian_dfs(g4b)
+        self.assertIsNone(res)
+
+        g4b.insert_edge(0, 2, 2.0)
+        res = hamiltonian_dfs(g4b)
+        self.assertEqual(res, [0, 2, 1, 3])
+
+    def test_hamilton_dfs_5(self):
+        """Test a DFS to find Hamiltonian paths."""
+        g5 = Graph(5, undirected=True)
+        g5.insert_edge(0, 3, 5.0)
+        g5.insert_edge(3, 1, 6.0)
+        g5.insert_edge(1, 4, 6.0)
+        g5.insert_edge(1, 2, 6.0)
+        res = hamiltonian_dfs(g5)
+        self.assertIsNone(res)
+
+        g5.insert_edge(0, 1, 6.0)
+        res = hamiltonian_dfs(g5)
+        self.assertIsNone(res)
+
+        g5.insert_edge(4, 2, 6.0)
+        res = hamiltonian_dfs(g5)
+        self.assertEqual(res, [0, 3, 1, 4, 2])
+
+    def test_hamilton_dfs_5b(self):
+        """Test a DFS to find Hamiltonian paths."""
+        g5 = Graph(5, undirected=True)
+        g5.insert_edge(0, 3, 5.0)
+        g5.insert_edge(0, 1, 5.0)
+        g5.insert_edge(0, 4, 5.0)
+        g5.insert_edge(1, 2, 5.0)
+        res = hamiltonian_dfs(g5)
+        self.assertIsNone(res)
+
+        g5.insert_edge(3, 4, 6.0)
+        res = hamiltonian_dfs(g5)
+        self.assertEqual(res, [2, 1, 0, 3, 4])
+
+    def test_hamilton_dfs_5c(self):
+        """Test a DFS to find Hamiltonian paths on Figure 18-4."""
+        g5 = Graph(5, undirected=False)
+        g5.insert_edge(0, 1, 1.0)
+        g5.insert_edge(1, 0, 1.0)
+        g5.insert_edge(1, 2, 1.0)
+        g5.insert_edge(1, 3, 1.0)
+        g5.insert_edge(2, 0, 1.0)
+        g5.insert_edge(2, 3, 1.0)
+        g5.insert_edge(2, 4, 1.0)
+        g5.insert_edge(3, 2, 1.0)
+
+        res = hamiltonian_dfs(g5)
+        self.assertEqual(res, [0, 1, 3, 2, 4])
+
+    def test_hamilton_dfs_6(self):
+        """Test a DFS to find Hamiltonian paths."""
+        g6 = Graph(6, undirected=True)
+        g6.insert_edge(0, 1, 5.0)
+        g6.insert_edge(0, 2, 6.0)
+        g6.insert_edge(0, 3, 2.0)
+        g6.insert_edge(1, 2, 3.0)
+        g6.insert_edge(1, 3, 1.0)
+        g6.insert_edge(1, 4, 1.0)
+        g6.insert_edge(1, 5, 2.0)
+        g6.insert_edge(2, 5, 6.0)
+        g6.insert_edge(3, 4, 7.0)
+        g6.insert_edge(3, 5, 5.0)
+        g6.insert_edge(4, 5, 1.0)
+
+        res = hamiltonian_dfs(g6)
+        self.assertEqual(res, [0, 1, 2, 5, 3, 4])
+
+    def test_hamilton_dfs_6b(self):
+        """Test a DFS to find Hamiltonian paths."""
+        g6 = Graph(6, undirected=True)
+        g6.insert_edge(0, 1, 5.0)
+        g6.insert_edge(0, 3, 6.0)
+        g6.insert_edge(1, 2, 3.0)
+        g6.insert_edge(1, 3, 1.0)
+        g6.insert_edge(1, 4, 1.0)
+        g6.insert_edge(1, 5, 2.0)
+        g6.insert_edge(2, 5, 6.0)
+
+        res = hamiltonian_dfs(g6)
+        self.assertIsNone(res)
+
+    # --- Functions for TSP ---------------------------------
+    def test_tsp_1(self):
+        """Test DFS for TSP."""
+        (score, res) = tsp_dfs(self.g1)
+        self.assertEqual(score, 0.0)
+        self.assertEqual(res, [0])
+
+    def test_tsp_3(self):
+        """Test DFS for TSP."""
+        (score, res) = tsp_dfs(self.g3)
+        self.assertEqual(score, 3.8)
+        self.assertEqual(res, [0, 1, 2, 0])
+
+    def test_tsp_3b(self):
+        """Test DFS for TSP."""
+        g3b = Graph(3, undirected=True)
+        g3b.insert_edge(0, 1, 1.0)
+        g3b.insert_edge(0, 2, 2.0)
+
+        (score, res) = tsp_dfs(g3b)
+        self.assertEqual(score, math.inf)
+        self.assertEqual(res, [])
+
+    def test_tsp_4(self):
+        """Test DFS for TSP."""
+        (score, res) = tsp_dfs(self.g4)
+        self.assertEqual(score, 3.5)
+        self.assertEqual(res, [0, 2, 3, 1, 0])
+
+    def test_tsp_4b(self):
+        """Test DFS for TSP."""
+        g4b = Graph(4, undirected=True)
+        g4b.insert_edge(0, 1, 5.0)
+        g4b.insert_edge(1, 2, 6.0)
+        g4b.insert_edge(1, 3, 2.0)
+
+        (score, res) = tsp_dfs(g4b)
+        self.assertEqual(score, math.inf)
+        self.assertEqual(res, [])
+
+        g4b.insert_edge(0, 3, 2.0)
+        (score, res) = tsp_dfs(g4b)
+        self.assertEqual(score, math.inf)
+        self.assertEqual(res, [])
+
+        g4b.insert_edge(3, 2, 4.0)
+        (score, res) = tsp_dfs(g4b)
+        self.assertEqual(score, 17.0)
+        self.assertEqual(res, [0, 1, 2, 3, 0])
+
+        g4b.insert_edge(0, 2, 1.0)
+        (score, res) = tsp_dfs(g4b)
+        self.assertEqual(score, 11.0)
+        self.assertEqual(res, [0, 3, 1, 2, 0])
+
+    def test_tsp_5(self):
+        """Test DFS for TSP."""
+        g = Graph(5, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 2, 1.0)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(0, 4, 1.0)
+        (score, res) = tsp_dfs(g)
+        self.assertEqual(score, math.inf)
+        self.assertEqual(res, [])
+
+        g.insert_edge(1, 2, 5.0)
+        g.insert_edge(2, 3, 5.0)
+        g.insert_edge(3, 4, 5.0)
+        (score, res) = tsp_dfs(g)
+        self.assertEqual(score, 17.0)
+        self.assertEqual(res, [0, 1, 2, 3, 4, 0])
+
+        g.insert_edge(1, 3, 1.0)
+        (score, res) = tsp_dfs(g)
+        self.assertEqual(res, [0, 2, 1, 3, 4, 0])
+        self.assertEqual(score, 13.0)
+
+        g.insert_edge(1, 3, 1.0)
+        (score, res) = tsp_dfs(g)
+        self.assertEqual(res, [0, 2, 1, 3, 4, 0])
+        self.assertEqual(score, 13.0)
+
+        g.insert_edge(2, 4, 3.0)
+        (score, res) = tsp_dfs(g)
+        self.assertEqual(res, [0, 1, 3, 2, 4, 0])
+        self.assertEqual(score, 11.0)
+
+    def test_tsp_6(self):
+        g6 = Graph(6, undirected=True)
+        g6.insert_edge(0, 1, 5.0)
+        g6.insert_edge(0, 2, 6.0)
+        g6.insert_edge(0, 3, 2.0)
+        g6.insert_edge(1, 2, 3.0)
+        g6.insert_edge(1, 3, 1.0)
+        g6.insert_edge(1, 4, 1.0)
+        g6.insert_edge(1, 5, 2.0)
+        g6.insert_edge(2, 5, 6.0)
+        g6.insert_edge(3, 4, 7.0)
+        g6.insert_edge(3, 5, 5.0)
+        g6.insert_edge(4, 5, 1.0)
+
+        (score, res) = tsp_dfs(g6)
+        self.assertEqual(score, 17.0)
+        self.assertEqual(res, [0, 2, 5, 4, 1, 3, 0])
+
+    def test_tsp_6b(self):
+        """Test DFS for TSP."""
+        g6 = Graph(6, undirected=True)
+        g6.insert_edge(0, 1, 5.0)
+        g6.insert_edge(0, 3, 6.0)
+        g6.insert_edge(1, 2, 3.0)
+        g6.insert_edge(1, 3, 1.0)
+        g6.insert_edge(1, 4, 1.0)
+        g6.insert_edge(1, 5, 2.0)
+        g6.insert_edge(2, 5, 6.0)
+
+        (score, res) = tsp_dfs(g6)
+        self.assertEqual(score, math.inf)
+        self.assertEqual(res, [])
 
     # --- Functions for Eulerian Paths ----------------------
     def test_check_eulerian_cycle(self):
