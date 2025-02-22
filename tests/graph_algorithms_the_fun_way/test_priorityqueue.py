@@ -24,7 +24,6 @@ def is_sorted(arr) -> bool:
 
 
 class TestPriorityQueue(unittest.TestCase):
-
     def test_is_empty(self):
         """Test the is_empty function."""
         pq = PriorityQueue(10)

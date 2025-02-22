@@ -11,7 +11,6 @@ from graph_algorithms_the_fun_way.topological import (
 
 
 class TestGraphTopological(unittest.TestCase):
-
     def setUp(self):
         """Set up graphs to use for the tests."""
         self.g_line = Graph(4, undirected=False)

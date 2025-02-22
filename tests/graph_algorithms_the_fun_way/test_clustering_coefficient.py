@@ -5,7 +5,6 @@ import unittest
 
 
 class TestGraphMetrics(unittest.TestCase):
-
     def setUp(self):
         """Create three graphs to be used in the tests."""
         self.g4 = Graph(4, undirected=True)

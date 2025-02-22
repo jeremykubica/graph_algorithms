@@ -4,7 +4,6 @@ import unittest
 
 
 class TestGraph(unittest.TestCase):
-
     def test_empty(self):
         """Test we can create an empty graph."""
         g = Graph(0)

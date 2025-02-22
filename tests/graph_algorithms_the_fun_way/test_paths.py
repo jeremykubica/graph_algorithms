@@ -17,7 +17,6 @@ from graph_algorithms_the_fun_way.paths import (
 
 
 class TestGrapPaths(unittest.TestCase):
-
     def setUp(self):
         """Set up data to be used throughout the tests."""
         self.g1 = Graph(1, undirected=False)

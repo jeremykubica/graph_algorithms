@@ -13,7 +13,6 @@ from graph_algorithms_the_fun_way.graph import Graph
 
 
 class TestFileReaders(unittest.TestCase):
-
     def setUp(self):
         """Create the location of the test data directory."""
         self._test_data_dir = Path(__file__).parent / "test_data"

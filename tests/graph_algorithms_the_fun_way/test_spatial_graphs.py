@@ -9,7 +9,6 @@ from graph_algorithms_the_fun_way.spatial_graphs import (
 
 
 class TestGraphSpatial(unittest.TestCase):
-
     def setUp(self):
         self.p3 = [Point(0, 0), Point(2, 0), Point(0, 1)]
 

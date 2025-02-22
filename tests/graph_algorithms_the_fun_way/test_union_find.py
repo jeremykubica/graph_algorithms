@@ -4,7 +4,6 @@ import unittest
 
 
 class TestUnionFind(unittest.TestCase):
-
     def test_basic(self):
         """Test basic operations of a UnionFind data structure."""
         djs = UnionFind(3)

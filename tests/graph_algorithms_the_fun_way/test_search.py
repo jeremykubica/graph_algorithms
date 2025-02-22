@@ -38,7 +38,6 @@ def euclidean_dist(x1: float, y1: float, x2: float, y2: float) -> float:
 
 
 class TestSearch(unittest.TestCase):
-
     def test_simple_bfs(self):
         """Test BFS on a graph with 3 nodes."""
         g = Graph(3, undirected=True)

@@ -10,7 +10,6 @@ import unittest
 
 
 class TestGraphMST(unittest.TestCase):
-
     def setUp(self):
         """Set up graphs we will use throughout the tests."""
         self.g3 = Graph(3, undirected=True)

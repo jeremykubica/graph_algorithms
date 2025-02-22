@@ -98,7 +98,6 @@ def prims(g: Graph) -> Union[list, None]:
         for edge in current.get_edge_list():
             neighbor: int = edge.to_node
             if pq.in_queue(neighbor):
-
                 if edge.weight < pq.get_priority(neighbor):
                     pq.update_priority(neighbor, edge.weight)
                     last[neighbor] = index
