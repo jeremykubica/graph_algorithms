@@ -37,6 +37,6 @@ jobs:
     - name: List dependencies
       run: |
         pip list
-    - name: Run unit tests with pytest
+    - name: Run unit tests with unittest
       run: |
-        python -m pytest
+        python -m unittest
