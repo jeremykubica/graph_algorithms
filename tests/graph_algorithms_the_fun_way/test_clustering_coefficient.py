@@ -35,7 +35,7 @@ class TestGraphMetrics(unittest.TestCase):
         self.g6.insert_edge(4, 5, 1.0)
 
     def test_neighbors(self):
-        """Test that we can get a node's out neighbors."""
+        """Test that we can get a node's out-neighbors."""
         self.assertEqual(self.g6.nodes[0].get_out_neighbors(), set([1, 3, 4]))
         self.assertEqual(self.g6.nodes[1].get_out_neighbors(), set([0, 2, 4]))
         self.assertEqual(self.g6.nodes[2].get_out_neighbors(), set([1, 4, 5]))

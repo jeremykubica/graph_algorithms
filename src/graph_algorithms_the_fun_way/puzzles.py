@@ -12,7 +12,7 @@ import math
 import queue
 from typing import Union
 
-from graph_algorithms_the_fun_way.graph import Graph
+from graph_algorithms_the_fun_way.graph import Graph, Node
 from graph_algorithms_the_fun_way.search import breadth_first_search
 
 
@@ -195,7 +195,7 @@ def create_prisoners_and_guards() -> Graph:
 
 
 def pg_state_to_index_map(g: Graph) -> dict:
-    """Create a map of each start to the corresponding node's index.
+    """Create a map of each state to the corresponding node's index.
 
     Parameters
     ----------

@@ -16,7 +16,7 @@ from typing import Union
 
 
 class CapacityEdge:
-    """An object to represent information about edges with capacity.
+    """An object to represent information for edges with capacity.
 
     Attributes
     ----------
@@ -74,7 +74,7 @@ class ResidualGraph:
         The node index of the sink node.
     edges : list of dict
         A list of dictionaries where each node has a dictionary mapping
-        that destination index to a CapacityEdge.
+        destination indices to a corresponding CapacityEdge.
     all_neighbors : list of set
         A list of sets where each node has a set of all its neighbors' indices.
     """
@@ -185,7 +185,8 @@ class ResidualGraph:
         Parameters
         ----------
         last : list
-            The previous node's index for each node on the path.
+            Maps the index of each node in the graph to the index of the node
+            before it on the path.
 
         Returns
         -------
@@ -209,7 +210,8 @@ class ResidualGraph:
         Parameters
         ----------
         last : list
-            The previous node's index for each node on the path.
+            Maps the index of each node in the graph to the index of the node
+            before it on the path.
         amount : float
             The change in flow along the path.
         """
@@ -244,7 +246,8 @@ def augmenting_path_dfs_recursive(g: ResidualGraph, current: int, seen: list, la
     seen : list of bool
         Whether each node in the graph has been marked seen.
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     seen[current] = True
 
@@ -267,7 +270,8 @@ def find_augmenting_path_dfs(g: ResidualGraph) -> list:
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     seen: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -286,7 +290,8 @@ def find_augmenting_path_bfs(g: ResidualGraph) -> list:
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     seen: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -313,7 +318,7 @@ def augment_multisource_graph(g: Graph, sources: list) -> int:
     g : ResidualGraph
         The input graph.
     sources : list
-        A list of noide indices for each source in the graph.
+        A list of node indices for each source in the graph.
 
     Returns
     -------
@@ -340,7 +345,7 @@ def augment_multisink_graph(g: Graph, sinks: list) -> int:
     g : ResidualGraph
         The input graph.
     sinks : list
-        A list of noide indices for each sink in the graph.
+        A list of node indices for each sink in the graph.
 
     Returns
     -------
@@ -360,7 +365,7 @@ def augment_multisink_graph(g: Graph, sinks: list) -> int:
 
 
 def ford_fulkerson(g: Graph, source: int, sink: int) -> ResidualGraph:
-    """The Ford-Fulkerson algorithm for maximum flow using DFS.
+    """The Ford-Fulkerson algorithm for maximum flow (using DFS).
 
     Parameters
     ----------

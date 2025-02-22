@@ -1,4 +1,4 @@
-"""Functions for operating on paths (Chapter 3).
+"""Functions for operating on paths (chapter 3 and chapter 18).
 
 This module provides example code from Jeremy Kubica's book
 Graph Algorithms the Fun Way (No Starch Press 2024). As noted
@@ -27,7 +27,8 @@ def last_path_length(last: list, final: int, goal: int = -1) -> int:
     Parameters
     ----------
     last : list of int
-        For each node the index of the node preceding it on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     final : int
         The destination node of the path.
     goal : int
@@ -162,7 +163,8 @@ def check_last_path_valid(g: Graph, last: list) -> bool:
     g : Graph
         The input graph.
     path : list of int
-        For each node the index of the node preceding it on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
 
     Returns
     -------
@@ -212,7 +214,7 @@ def edge_path_to_node_path(edge_list: list) -> list:
 
 
 def node_path_to_edge_path(node_list: list) -> list:
-    """Convert a path represented as a list of nodes to a path
+    """Convert a path represented as a list of node indices to a path
     represented as a list of edges.
 
     Parameters
@@ -242,10 +244,11 @@ def make_node_path_from_last(last: list, dest: int) -> list:
 
     Parameters
     ----------
-    g : Graph
-        The input graph.
-    path : list of int
-        For each node the index of the node preceding it on the path.
+    last : list of int
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
+    dest : int
+        The destination node of the path.
 
     Returns
     -------
@@ -315,14 +318,15 @@ def hamiltonian_dfs_rec(g: Graph, current: int, path: list, seen: list) -> Union
     current : int
         The index of the current node.
     path : list of int
-        The nodes visited so far.
+        The indices of the nodes visited so far.
     seen : list of bool
         Whether each node in the graph has been marked seen.
 
     Returns
     -------
     path : list or None
-        Returns the path if there is one found down this branch and None otherwise.
+        Returns the path (as a list of node incides) if there is valid path was found down
+        this branch and None otherwise.
     """
     path.append(current)
     seen[current] = True
@@ -353,7 +357,7 @@ def hamiltonian_dfs(g: Graph) -> Union[list, None]:
     Returns
     -------
     path : list or None
-        Returns the path if there is one found and None otherwise.
+        Returns the path (as a list of node incides) if there is one found and None otherwise.
     """
     seen: list = [False] * g.num_nodes
     for start in range(g.num_nodes):
@@ -364,7 +368,7 @@ def hamiltonian_dfs(g: Graph) -> Union[list, None]:
 
 
 # -------------------------------------------------------
-# --- Functions for the Traveling Sales Person ----------
+# --- Functions for the Traveling Salesperson -----------
 # -------------------------------------------------------
 
 
@@ -376,7 +380,7 @@ def tsp_dfs_rec(g: Graph, path: list, seen: list, cost: float) -> tuple:
     g : Graph
         The input graph.
     path : list of int
-        The nodes visited so far.
+        The indices of the nodes visited so far.
     seen : list of bool
         Whether each node in the graph has been marked seen.
     cost : float
@@ -385,7 +389,7 @@ def tsp_dfs_rec(g: Graph, path: list, seen: list, cost: float) -> tuple:
     Returns
     -------
     (best_score, best_path) : tuple of (float, list)
-        The cost of the best path found so far and the actual path.
+        The cost of the best path found so far and the actual path as a list of node incides.
     """
     current: int = path[-1]
 
@@ -417,7 +421,7 @@ def tsp_dfs_rec(g: Graph, path: list, seen: list, cost: float) -> tuple:
 
 def tsp_dfs(g: Graph) -> tuple:
     """The outer wrapper function for the depth-first search for
-    a traveling sales person path.
+    a traveling salesperson path.
 
     Parameters
     ----------
@@ -427,7 +431,7 @@ def tsp_dfs(g: Graph) -> tuple:
     Returns
     -------
     (best_score, best_path) : tuple of (float, list)
-        The cost of the best path found so far and the actual path.
+        The cost of the best path found so far and the actual path as a list of node incides.
     """
     if g.num_nodes == 1:
         return (0.0, [0])
@@ -479,7 +483,7 @@ def is_eulerian_cycle(g: Graph, path: list) -> bool:
     g : Graph
         The input graph.
     path : list of int
-        For each node the index of the node preceding it on the path.
+        The list of node indices visited along the path (in order).
 
     Returns
     -------

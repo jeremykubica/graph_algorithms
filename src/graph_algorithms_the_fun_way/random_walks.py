@@ -43,17 +43,17 @@ def is_valid_probability_graph(g: Graph) -> bool:
 
 
 def choose_next_node(current: Node) -> int:
-    """Randomly choose a neighboring node to which to transition.
+    """Randomly choose a neighboring node.
 
     Parameters
     ----------
     current : Node
-        The current node.
+        The index of the current node.
 
     Returns
     -------
     int
-        The index of the choosen neighbor.
+        The index of the chosen neighbor.
     """
     prob: float = random.random()
     cumulative: float = 0.0
@@ -72,12 +72,12 @@ def choose_start(S: list) -> int:
     Parameters
     ----------
     S : list of float
-        Maps each node's index to the probability that it is choosen.
+        Maps each node's index to the probability that it is chosen.
 
     Returns
     -------
     int
-        The index of the choosen starting node.
+        The index of the chosen starting node.
     """
     prob: float = random.random()
     cumulative: float = 0.0
@@ -124,7 +124,7 @@ def estimate_graph_from_random_walks(walks: list) -> Graph:
     Parameters
     ----------
     walks : list of list of int
-        A list of walks.
+        A list of walks where each walk is a list of node indices.
 
     Returns
     -------
@@ -159,12 +159,12 @@ def estimate_start_from_random_walks(walks: list) -> list:
     Parameters
     ----------
     walks : list of list of int
-        A list of walks.
+        A list of walks where each walk is a list of node indices.
 
     Returns
     -------
     counts : list of floats
-        Maps each node's index to the probability that it is choosen.
+        Maps each node's index to the probability that it is chosen.
     """
     num_nodes: int = 0
     for path in walks:

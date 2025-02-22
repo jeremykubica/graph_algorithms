@@ -118,7 +118,8 @@ def astar_dynamic(w: World):
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     visited: dict = {}
     last: dict = {}

@@ -4,25 +4,6 @@ from graph_algorithms_the_fun_way.graph import Graph
 from graph_algorithms_the_fun_way.coloring import *
 
 
-def is_unlabeled(g):
-    """Check whether all nodes in a graph are unlabeled.
-
-    Parameters
-    ----------
-    g : Graph
-        The input graph.
-
-    Returns
-    -------
-    bool
-        True if all nodes in a graph are unlabeled and False otherwise.
-    """
-    for n in g.nodes:
-        if n.label is not None:
-            return False
-    return True
-
-
 class TestGraphColoring(unittest.TestCase):
     def test_is_coloring_valid(self):
         """Test is_graph_coloring_valid."""
@@ -412,7 +393,7 @@ class TestGraphColoring(unittest.TestCase):
         self.assertTrue(is_graph_coloring_valid(g))
 
     def test_dfs_prune_5(self):
-        """Test DFS with pruning for graph coloring for Figure 16-7."""
+        """Test DFS with pruning for graph coloring on Figure 16-7."""
         g = Graph(5, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 3, 1.0)
@@ -435,7 +416,7 @@ class TestGraphColoring(unittest.TestCase):
         self.assertTrue(is_graph_coloring_valid(g))
 
     def test_dfs_prune_5b(self):
-        """Test DFS with pruning for graph coloring for Figure 16-8."""
+        """Test DFS with pruning for graph coloring on Figure 16-8."""
         g = Graph(5, undirected=True)
         g.insert_edge(0, 3, 1.0)
         g.insert_edge(1, 2, 1.0)

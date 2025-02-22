@@ -28,7 +28,8 @@ def Dijkstras(g: Graph, start_index: int) -> list:
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     cost: list = [math.inf] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -69,8 +70,9 @@ def BellmanFord(g: Graph, start_index: int) -> Union[list, None]:
     Returns
     -------
     last : list of int or None
-        The previous node's index for each node on the path. Returns None if
-        the graph contains a negative cost cycle.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path. Returns None if the graph contains a negative
+        cost cycle.
     """
     cost: list = [math.inf] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -101,7 +103,9 @@ def FloydWarshall(g: Graph) -> list:
     Returns
     -------
     last : list of list of int
-        The previous node's index for each node on the path.
+        For each starting node index, provides a list that maps the index of each
+        destination node to the index of the node before it on the path from that
+        starting node.
     """
     N: int = g.num_nodes
     cost: list = [[math.inf] * N for _ in range(N)]

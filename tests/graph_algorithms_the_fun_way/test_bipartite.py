@@ -54,7 +54,7 @@ class TestBipartite(unittest.TestCase):
         self.assertIsNone(bipartite_labeling(g))
 
     def test_is_bipartite_7(self):
-        """Test bipartite labeling from figure 15-4."""
+        """Test bipartite labeling on Figure 15-4."""
         g = Graph(7, undirected=True)
         g.insert_edge(0, 3, 1.0)
         g.insert_edge(0, 5, 1.0)
@@ -66,7 +66,7 @@ class TestBipartite(unittest.TestCase):
         self.assertEqual(bipartite_labeling(g), [True, False, True, False, True, False, True])
 
     def test_is_bipartite_7_fail(self):
-        """Test bipartite labeling that fails from Figure 15-5."""
+        """Test bipartite labeling that fails on Figure 15-5."""
         g = Graph(7, undirected=True)
         g.insert_edge(0, 3, 1.0)
         g.insert_edge(0, 5, 1.0)

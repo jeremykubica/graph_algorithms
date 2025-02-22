@@ -325,8 +325,8 @@ class PriorityQueue:
 
         Returns
         -------
-        top : HeapItem
-            The topmost item.
+        top : HeapItem or None
+            The topmost item or None if the heap is empty.
         """
         if self.is_empty():
             return None
@@ -337,8 +337,8 @@ class PriorityQueue:
 
         Returns
         -------
-        priority : float
-            The priority of the topmost item.
+        priority : float or None
+            The priority of the topmost item or None if the heap is empty.
         """
         obj: Union[HeapItem, None] = self.peak_top()
         if not obj:
@@ -351,19 +351,12 @@ class PriorityQueue:
         Returns
         -------
         value : any
-            The value of the topmost item.
+            The value of the topmost item. None if the heap is empty.
         """
         obj: Union[HeapItem, None] = self.peak_top()
         if not obj:
             return None
         return obj.value
-
-    def pretty_print(self):
-        """Display the priority queue in a human readable format."""
-        print("PriorityQueue (MinHeap=%s) with %i items." % (str(self.is_min_heap), self.last_index))
-        for i in range(1, self.last_index + 1):
-            item = self.heap_array[i]
-            print("%i) %s : %f" % (i, str(item.value), item.priority))
 
 
 def pq_sort(arr, reverse=False):

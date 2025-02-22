@@ -18,7 +18,7 @@ from graph_algorithms_the_fun_way.priorityqueue import PriorityQueue
 
 
 def breadth_first_search(g: Graph, start: int) -> list:
-    """Perform breadth first search from a given starting node.
+    """Breadth-first search from a given starting node.
 
     Parameters
     ----------
@@ -30,7 +30,8 @@ def breadth_first_search(g: Graph, start: int) -> list:
     Returns
     -------
     last : list of int
-        A list of previous nodes for all nodes in the graph.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     seen: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -116,7 +117,8 @@ def dfs_recursive_path(g: Graph, ind: int, seen: list, last: list):
     seen : list of bool
         Whether each node in the graph has been marked seen.
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     seen[ind] = True
     current: Node = g.nodes[ind]
@@ -140,7 +142,8 @@ def depth_first_search_path(g: Graph) -> list:
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     seen: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -164,7 +167,8 @@ def depth_first_search_stack(g: Graph, start: int) -> list:
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     seen: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -198,7 +202,7 @@ def dfs_recursive_cc(g: Graph, ind: int, component: list, curr_comp: int):
     ind : int
         The index of the current node.
     component : list of int
-        The nodes in the current connected component.
+        The indices of the nodes in the current connected component.
     curr_comp : int
         The index of the current component.
     """
@@ -252,7 +256,8 @@ def greedy_search(g: Graph, h: list, start: int, goal: int) -> list:
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     visited: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -290,7 +295,8 @@ def astar_search(g: Graph, h: list, start: int, goal: int) -> list:
     Returns
     -------
     last : list of int
-        The previous node's index for each node on the path.
+        Maps the index of each node in the graph to the index of the node
+        before it on the path.
     """
     visited: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes

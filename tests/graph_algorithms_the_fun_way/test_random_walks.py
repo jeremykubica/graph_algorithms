@@ -153,7 +153,7 @@ class TestMarkovGraph(unittest.TestCase):
 
         # Deterministic cycle
         walk = random_walk(g, 0, 99)
-        hist = build_node_occurrence_hist(3, walk)
+        hist = _build_node_occurrence_hist(3, walk)
         self.assertEqual(hist[0], 33)
         self.assertEqual(hist[1], 33)
         self.assertEqual(hist[2], 33)
