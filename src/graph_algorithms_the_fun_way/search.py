@@ -1,5 +1,6 @@
 """Common graph search algorithms: BFS (Chapter 5), DFS (Chapter 4),
-Greedy (Chapter 8), and A* (Chapter 8).
+Greedy (Chapter 8), and A* (Chapter 8). Also includes some helper
+functions for testing later algorithms.
 
 This module provides example code from Jeremy Kubica's book
 Graph Algorithms the Fun Way (No Starch Press 2024). As noted
@@ -115,7 +116,7 @@ def dfs_recursive_path(g: Graph, ind: int, seen: list, last: list):
     seen : list of bool
         Whether each node in the graph has been marked seen.
     last : list of int
-        The previous node of each node on the path.
+        The previous node's index for each node on the path.
     """
     seen[ind] = True
     current: Node = g.nodes[ind]
@@ -139,7 +140,7 @@ def depth_first_search_path(g: Graph) -> list:
     Returns
     -------
     last : list of int
-        The previous node of each node on the path.
+        The previous node's index for each node on the path.
     """
     seen: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -163,7 +164,7 @@ def depth_first_search_stack(g: Graph, start: int) -> list:
     Returns
     -------
     last : list of int
-        The previous node of each node on the path.
+        The previous node's index for each node on the path.
     """
     seen: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -251,7 +252,7 @@ def greedy_search(g: Graph, h: list, start: int, goal: int) -> list:
     Returns
     -------
     last : list of int
-        The previous node of each node on the path.
+        The previous node's index for each node on the path.
     """
     visited: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -289,7 +290,7 @@ def astar_search(g: Graph, h: list, start: int, goal: int) -> list:
     Returns
     -------
     last : list of int
-        The previous node of each node on the path.
+        The previous node's index for each node on the path.
     """
     visited: list = [False] * g.num_nodes
     last: list = [-1] * g.num_nodes
@@ -317,3 +318,53 @@ def astar_search(g: Graph, h: list, start: int, goal: int) -> list:
                     pq.enqueue(neighbor, est_value)
 
     return last
+
+
+def dfs_preorder_recurse(g: Graph, ind: int, order: list, parents: list):
+    """The inner recursive function for dfs_preorder().
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+    ind : int
+        The current node's index.
+    order : list of int
+        The order each node is encountered.
+    parents : list of int
+        The parent node's index for each node in the DFS tree.
+    """
+    order[ind] = max(order) + 1
+    current: Node = g.nodes[ind]
+
+    for edge in current.get_edge_list():
+        neighbor: int = edge.to_node
+        if order[neighbor] == -1:
+            parents[neighbor] = ind
+            dfs_preorder_recurse(g, neighbor, order, parents)
+
+
+def dfs_preorder(g: Graph):
+    """Return the preorder of nodes encountered in a depth-first search.
+
+    Used for testing the Figures in Chapter 11.
+
+    Parameters
+    ----------
+    g : Graph
+        The input graph.
+
+    Returns
+    -------
+    order : list of int
+        The order each node is encountered.
+    parents : list of int
+        The parent node's index for each node in the DFS tree.
+    """
+    order: list = [-1] * g.num_nodes
+    parents: list = [-1] * g.num_nodes
+
+    for ind in range(g.num_nodes):
+        if order[ind] == -1:
+            dfs_preorder_recurse(g, ind, order, parents)
+    return order, parents

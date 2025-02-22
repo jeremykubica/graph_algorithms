@@ -8,12 +8,10 @@ Code from Graph Algorithms the Fun Way by Jeremy Kubica (No Starch Press 2024).
 
 This code is provided for illustration purposes only. The code written to match the explanations in the book
 and is NOT fully optimized and does not include all the validity checks that I would normally recommend
-in production code.
+in production code. It is posted here so readers can explore the algorithms and teachers can use the code in their classes.
 
 This project was automatically generated using the LINCC-Frameworks 
-[python-project-template](https://github.com/lincc-frameworks/python-project-template).
-
-For more information about the project template see the 
+[python-project-template](https://github.com/lincc-frameworks/python-project-template). For more information about the project template see the 
 [documentation](https://lincc-ppt.readthedocs.io/en/latest/).
 
 ## Dev Guide - Getting Started
@@ -26,16 +24,24 @@ python3 -m venv ~/envs/graph_book
 source ~/envs/graph_book/bin/activate
 ```
 
-Once you have created a new environment, you can install this project for local
-development using the following commands:
+Next you need to clone this repository. I recommend the github desktop client, but you can
+also use the command line tools.
 
 ```
->> ./.setup_dev.sh
+git clone https://github.com/jeremykubica/graph_algorithms
+cd graph_algorithms
+```
+
+Once you have created a new environment and downloaded the code, you can install this
+project for local testing using the following commands:
+
+```
 >> pip install -e .
 ```
 
-Notes:
-1. `./.setup_dev.sh` will initialize pre-commit for this local repository, so
-   that a set of tests will be run prior to completing a local commit. For more
-   information, see the Python Project Template documentation on 
-   [pre-commit](https://lincc-ppt.readthedocs.io/en/latest/practices/precommit.html)
+and you can run the unittests from the tests directory
+
+```
+>> cd tests/graph_algorithms_the_fun_way
+>> python -m unittest
+```

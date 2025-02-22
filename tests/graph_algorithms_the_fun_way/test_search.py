@@ -8,9 +8,10 @@ from graph_algorithms_the_fun_way.search import (
     breadth_first_search,
     depth_first_search_basic,
     depth_first_search_basic_all,
-    dfs_connected_components,
     depth_first_search_path,
     depth_first_search_stack,
+    dfs_connected_components,
+    dfs_preorder,
     greedy_search,
 )
 
@@ -418,6 +419,68 @@ class TestSearch(unittest.TestCase):
 
         g.insert_edge(2, 6, 1.0)
         self.assertEqual(dfs_connected_components(g), [0, 0, 0, 1, 0, 0, 0, 1])
+
+    def test_figure_11_7(self):
+        """Test the preorder list in figure 11-7."""
+        g = Graph(7, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 2, 1.0)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(0, 5, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 4, 1.0)
+        g.insert_edge(1, 6, 1.0)
+        g.insert_edge(2, 4, 1.0)
+        g.insert_edge(3, 5, 1.0)
+        order, parents = dfs_preorder(g)
+        self.assertEqual(order, [0, 1, 2, 5, 3, 6, 4])
+        self.assertEqual(parents, [-1, 0, 1, 0, 2, 3, 1])
+
+    def test_figure_11_8(self):
+        """Test the preorder list in figure 11-8."""
+        g = Graph(7, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(0, 5, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 4, 1.0)
+        g.insert_edge(1, 6, 1.0)
+        g.insert_edge(2, 4, 1.0)
+        g.insert_edge(3, 5, 1.0)
+        order, parents = dfs_preorder(g)
+        self.assertEqual(order, [0, 1, 2, 5, 3, 6, 4])
+        self.assertEqual(parents, [-1, 0, 1, 0, 2, 3, 1])
+
+    def test_figure_11_10(self):
+        """Test the preorder list in figure 11-10."""
+        g = Graph(8, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 4, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 4, 1.0)
+        g.insert_edge(2, 3, 1.0)
+        g.insert_edge(2, 6, 1.0)
+        g.insert_edge(3, 7, 1.0)
+        g.insert_edge(4, 5, 1.0)
+        g.insert_edge(6, 7, 1.0)
+        order, parents = dfs_preorder(g)
+        self.assertEqual(order, [0, 1, 2, 3, 6, 7, 5, 4])
+        self.assertEqual(parents, [-1, 0, 1, 2, 1, 4, 7, 3])
+
+    def test_figure_11_11(self):
+        """Test the preorder list in figure 11-11."""
+        g = Graph(7, undirected=True)
+        g.insert_edge(0, 1, 1.0)
+        g.insert_edge(0, 3, 1.0)
+        g.insert_edge(0, 5, 1.0)
+        g.insert_edge(1, 2, 1.0)
+        g.insert_edge(1, 4, 1.0)
+        g.insert_edge(1, 6, 1.0)
+        g.insert_edge(2, 4, 1.0)
+        g.insert_edge(3, 5, 1.0)
+        order, parents = dfs_preorder(g)
+        self.assertEqual(order, [0, 1, 2, 5, 3, 6, 4])
+        self.assertEqual(parents, [-1, 0, 1, 0, 2, 3, 1])
 
 
 if __name__ == "__main__":
