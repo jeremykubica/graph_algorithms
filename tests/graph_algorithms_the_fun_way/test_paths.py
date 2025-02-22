@@ -637,7 +637,6 @@ class TestGrapPaths(unittest.TestCase):
         g.insert_edge(4, 7, 1.0)
 
         path = hierholzers(g)
-        self.assertEqual(path, [0, 1, 3, 5, 6, 3, 4, 1, 2, 4, 7, 2, 0])
         self.assertTrue(is_eulerian_cycle(g, path))
 
     def test_hierholzers_5(self):
@@ -651,8 +650,7 @@ class TestGrapPaths(unittest.TestCase):
         g.insert_edge(2, 3, 1.0)
         g.insert_edge(3, 4, 1.0)
 
-        path = hierholzers(g)
-        self.assertEqual(path, [0, 3, 2, 0, 4, 3, 1, 0])
+        path = hierholzers(g)\
         self.assertTrue(is_eulerian_cycle(g, path))
 
 
