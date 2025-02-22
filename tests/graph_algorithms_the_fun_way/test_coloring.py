@@ -146,7 +146,7 @@ class TestGraphColoring(unittest.TestCase):
         self.assertTrue(is_graph_coloring_valid(g))
 
     def test_brute_force_3(self):
-        """Test brute force graph coloring."""
+        """Test brute-force graph coloring."""
         g = Graph(3, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(1, 2, 1.0)
@@ -165,7 +165,7 @@ class TestGraphColoring(unittest.TestCase):
         self.assertTrue(is_graph_coloring_valid(g))
 
     def test_brute_force_4(self):
-        """Test brute force graph coloring."""
+        """Test brute-force graph coloring."""
         g = Graph(4, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(1, 2, 1.0)
@@ -186,7 +186,7 @@ class TestGraphColoring(unittest.TestCase):
         self.assertTrue(is_graph_coloring_valid(g))
 
     def test_brute_force_5(self):
-        """Test brute force graph coloring."""
+        """Test brute-force graph coloring."""
         g = Graph(5, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 3, 1.0)
@@ -209,7 +209,7 @@ class TestGraphColoring(unittest.TestCase):
         self.assertTrue(is_graph_coloring_valid(g))
 
     def test_brute_force_6(self):
-        """Test brute force graph coloring."""
+        """Test brute-force graph coloring."""
         g = Graph(6, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(1, 2, 1.0)
@@ -234,7 +234,7 @@ class TestGraphColoring(unittest.TestCase):
         self.assertTrue(is_graph_coloring_valid(g))
 
     def test_brute_force_8(self):
-        """Test brute force graph coloring."""
+        """Test brute-force graph coloring."""
         g = Graph(8, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(1, 2, 1.0)

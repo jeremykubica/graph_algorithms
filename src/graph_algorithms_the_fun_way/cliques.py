@@ -22,7 +22,7 @@ def is_clique(g: Graph, nodes: list) -> bool:
     g : Graph
         The input graph.
     nodes : list
-        The nodes to test.
+        The indices of the nodes to test.
 
     Returns
     -------
@@ -46,12 +46,12 @@ def clique_expansion_options(g: Graph, clique: list) -> list:
     g : Graph
         The input graph.
     clique : list
-        The current set of nodes.
+        The indices of the current set of nodes.
 
     Returns
     -------
     options : list
-        The nodes that can be added.
+        The indices of the nodes that can be added.
     """
     options: list = []
     for i in range(g.num_nodes):
@@ -74,8 +74,8 @@ def clique_greedy(g: Graph) -> list:
 
     Returns
     -------
-    clique : list
-        The nodes in the clique.
+    clique : list of int
+        The indices of the nodes in the clique.
     """
     clique: list = []
     to_add: list = clique_expansion_options(g, clique)
@@ -93,14 +93,14 @@ def maximum_clique_recursive(g: Graph, clique: list, index: int) -> list:
     g : Graph
         The input graph.
     clique : list
-        The nodes in the current clique.
+        The indices of the nodes in the current clique.
     index : int
         The index of the current node to test.
 
     Returns
     -------
-    best : list
-        The nodes in the best clique found so far.
+    best : list of int
+        The indices of the nodes in the best clique found so far.
     """
     if index >= g.num_nodes:
         return copy.copy(clique)
@@ -132,8 +132,8 @@ def maximum_clique_backtracking(g: Graph) -> list:
 
     Returns
     -------
-    list
-        The nodes in the best clique found.
+    list of int
+        The indices of the nodes in the best clique found.
     """
     return maximum_clique_recursive(g, [], 0)
 
@@ -148,8 +148,8 @@ def maximum_clique_exh(g: Graph) -> list:
 
     Returns
     -------
-    max_clique : list
-        The nodes in the best clique found.
+    max_clique : list of int
+        The indices of the nodes in the best clique found.
     """
     options: list = [False, True]
     max_clique: list = []

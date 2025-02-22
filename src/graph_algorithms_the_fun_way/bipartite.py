@@ -80,7 +80,7 @@ class Matching:
         ind1 : int
             The index of one of the edge's end points.
         ind2 : int
-            The index of the other of the edge's end points.
+            The index of the other end point.
         score : float
             The score of the edge.
         """
@@ -100,7 +100,7 @@ class Matching:
         ind1 : int
             The index of one of the edge's end points.
         ind2 : int
-            The index of the other of the edge's end points.
+            The index of the other end point.
         score : float
             The score of the edge.
         """
@@ -114,7 +114,7 @@ class Matching:
 
 
 def bipartite_matching_exh(g: Graph) -> Union[list, None]:
-    """The exhaustive algorithm to find a maximum weight matching.
+    """The exhaustive algorithm to find a maximum-weight matching.
 
     Parameters
     ----------
@@ -137,7 +137,7 @@ def bipartite_matching_exh(g: Graph) -> Union[list, None]:
 
 
 def matching_recursive(g: Graph, labels: list, current: Matching, index: int) -> Matching:
-    """The recursive implementation of the exhaustive algorithm to find a maximum weight matching.
+    """The recursive implementation of the exhaustive algorithm to find a maximum-weight matching.
 
     Parameters
     ----------
@@ -172,7 +172,7 @@ def matching_recursive(g: Graph, labels: list, current: Matching, index: int) ->
 
 
 def bipartite_matching_max_flow(g: Graph) -> Union[list, None]:
-    """The maximum flow algorithm for maximum-cardinality matching.
+    """The maximum-flow algorithm for maximum-cardinality matching.
 
     Parameters
     ----------

@@ -22,7 +22,7 @@ def is_vertex_cover(g: Graph, nodes: list) -> bool:
     g : Graph
         The input graph.
     nodes : list
-        The nodes to test.
+        The indices of the nodes to test.
 
     Returns
     -------
@@ -45,12 +45,12 @@ def vertex_cover_greedy_choice(g: Graph, nodes: list) -> int:
     g : Graph
         The input graph.
     nodes : list
-        The current set of nodes.
+        The indices current set of nodes.
 
     Returns
     -------
     best_option : int
-        The best node to add according to the heuristic.
+        The index of the best node to add according to the heuristic.
     """
     edges_covered: set = set([])
     for index in nodes:
@@ -83,8 +83,8 @@ def vertex_cover_greedy(g: Graph) -> list:
 
     Returns
     -------
-    nodes : list
-        The nodes in the found vertex cover.
+    nodes : list of int
+        The indices of the nodes in the found vertex cover.
     """
     nodes: list = []
     to_add: int = vertex_cover_greedy_choice(g, nodes)
@@ -102,14 +102,14 @@ def minimum_vertex_cover_rec(g: Graph, current: set, index: int) -> set:
     g : Graph
         The input graph.
     current : set
-        The nodes in the current set.
+        The indices of the nodes in the current set.
     index : int
         The index of the current node to test.
 
     Returns
     -------
-    best : list
-        The nodes in the best vertex cover found so far.
+    best : list of int
+        The indices of the nodes in the best vertex cover found so far.
     """
     if index >= g.num_nodes:
         return copy.copy(current)
@@ -141,8 +141,8 @@ def minimum_vertex_cover_backtracking(g: Graph) -> list:
 
     Returns
     -------
-    list
-        The nodes in the best vertex cover found.
+    list of int
+        The indices of the nodes in the best vertex cover found.
     """
     current: set = set([i for i in range(g.num_nodes)])
     best: set = minimum_vertex_cover_rec(g, current, 0)
@@ -159,8 +159,8 @@ def minimum_vertex_cover_exh(g: Graph) -> list:
 
     Returns
     -------
-    min_cover : list
-        The nodes in the best vertex cover found.
+    min_cover : list of int
+        The indices of the nodes in the best vertex cover found.
     """
     options: list = [False, True]
     min_cover: list = [i for i in range(g.num_nodes)]

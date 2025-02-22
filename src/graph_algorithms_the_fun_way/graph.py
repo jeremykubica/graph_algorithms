@@ -129,8 +129,8 @@ class Node:
 
     def get_neighbors(self) -> set:
         """Return a set of the indices to all neighbors in the edge dictionary.
-        For undirected graphs this included all neighbors. For directed graphs,
-        this only includes out neighbors.
+        For undirected graphs this includes all neighbors. For directed graphs,
+        this only includes out-neighbors.
 
         Returns
         -------
@@ -144,8 +144,8 @@ class Node:
 
     def get_out_neighbors(self) -> set:
         """Return a set of the indices to all neighbors in the edge dictionary.
-        For undirected graphs this included all neighbors. For directed graphs,
-        this only includes out neighbors.
+        For undirected graphs this includes all neighbors. For directed graphs,
+        this only includes out-neighbors.
 
         Returns
         -------
@@ -181,11 +181,11 @@ class Node:
         return True
 
     def out_degree(self):
-        """Returns the out degree of the node."""
+        """Returns the out-degree of the node."""
         return len(self.edges)
 
     def undirected_degree(self):
-        """Return a count of the undirected degree of a node."""
+        """Return the undirected degree of a node."""
         count: int = len(self.edges)
         if self.index in self.edges:
             count += 1
@@ -365,7 +365,7 @@ class Graph:
         Returns
         -------
         neighbors : set
-            The set of in neighbors' indices for the given node.
+            The set of the in-neighbors' indices for the given node.
         """
         neighbors: set = set()
         for node in self.nodes:
@@ -453,14 +453,6 @@ class Graph:
         for n in self.nodes:
             n.label = None
 
-    def print_matrix(self):
-        """Display the graph as an adjacency matrix."""
-        for j in range(self.num_nodes):
-            s = ""
-            for k in range(self.num_nodes):
-                s = "%s%5.1f" % (s, self.edge_weight(j, k))
-            print(s)
-
     def print_adj_list(self):
         """Display the graph in adjacency list format."""
         for j in range(self.num_nodes):
@@ -505,9 +497,9 @@ class Graph:
         return True
 
     def is_same_structure(self, g2) -> bool:
-        """Check that two graphs share the same structure: The number of nodes, the
-        labeling of the nodes, and the same connectivity (edges and weights without
-        regard to ordering). Labels are not examined. Used for testing.
+        """Check that two graphs share the same structure: The number of nodes and
+        the same connectivity (edges and weights without regard to ordering).
+        Labels are not examined. Used for testing.
 
         Parameters
         ----------
@@ -584,7 +576,7 @@ def make_transpose_graph(g: Graph) -> Graph:
 
 
 def edge_in_list(edges: list, u: int, v: int, undirected: bool) -> bool:
-    """A testing function that checks if a given node is in a list of all edges.
+    """A testing function that checks if a given edge is in a list of all edges.
 
     Parameters
     ----------
@@ -599,7 +591,7 @@ def edge_in_list(edges: list, u: int, v: int, undirected: bool) -> bool:
 
     Returns
     -------
-    : bool
+    bool
         True if the edge was found in the list and False otherwise.
     """
     for e in edges:

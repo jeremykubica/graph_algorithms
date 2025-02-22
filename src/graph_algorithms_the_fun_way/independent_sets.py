@@ -23,7 +23,7 @@ def is_independent_set(g: Graph, nodes: list) -> bool:
     g : Graph
         The input graph.
     nodes : list
-        The nodes to test.
+        The indices of the nodes to test.
 
     Returns
     -------
@@ -47,12 +47,12 @@ def independent_set_expansion_options(g: Graph, current: list) -> list:
     g : Graph
         The input graph.
     current : list
-        The nodes to test.
+        The indices of the nodes to test.
 
     Returns
     -------
     options : list
-        The nodes that can be added.
+        The indices of the nodes that can be added.
     """
     options: list = []
     for i in range(g.num_nodes):
@@ -74,12 +74,12 @@ def independent_set_lowest_expansion(g: Graph, current: list) -> int:
     g : Graph
         The input graph.
     current : list
-        The current set of nodes.
+        The indices of the current set of nodes.
 
     Returns
     -------
     best_option : int
-        The best node to add according to the heuristic.
+        The index of the best node to add according to the heuristic.
     """
     best_option: int = -1
     best_num_edges: int = g.num_nodes + 1
@@ -106,7 +106,7 @@ def independent_set_greedy(g: Graph) -> list:
     Returns
     -------
     i_set : list
-        The nodes in the found independent set.
+        The indices of the nodes in the found independent set.
     """
     i_set: list = []
     to_add: int = independent_set_lowest_expansion(g, i_set)
@@ -126,8 +126,8 @@ def independent_set_random(g: Graph) -> list:
 
     Returns
     -------
-    i_set : list
-        The nodes in the independent set found.
+    i_set : list of int
+        The indices of the nodes in the independent set found.
     """
     i_set: list = []
     options: list = independent_set_expansion_options(g, i_set)
@@ -150,8 +150,8 @@ def build_independent_set_random(g: Graph, iterations: int) -> list:
 
     Returns
     -------
-    best_iset : list
-        The nodes in the independent set found.
+    best_iset : list of int
+        The indices of the nodes in the best independent set found.
     """
     best_iset: list = []
     for i in range(iterations):
@@ -169,14 +169,14 @@ def maximum_independent_set_rec(g: Graph, current: list, index: int) -> list:
     g : Graph
         The input graph.
     current : list
-        The nodes in the current independent set.
+        The indices of the nodes in the current independent set.
     index : int
         The index of the current node to test.
 
     Returns
     -------
-    best : list
-        The nodes in the best independent set found so far.
+    best : list of int
+        The indices of the nodes in the best independent set found.
     """
     if index >= g.num_nodes:
         return copy.copy(current)
@@ -208,8 +208,8 @@ def maximum_independent_set_backtracking(g: Graph) -> list:
 
     Returns
     -------
-    list
-        The nodes in the best independent set found.
+    list of int
+        The indices of the nodes in the best independent set found.
     """
     return maximum_independent_set_rec(g, [], 0)
 
@@ -225,7 +225,7 @@ def maximum_independent_set_exh(g: Graph) -> list:
     Returns
     -------
     max_set : list
-        The nodes in the best independent set found.
+        The indices of the nodes in the best independent set found.
     """
     options: list = [False, True]
     max_set: list = []

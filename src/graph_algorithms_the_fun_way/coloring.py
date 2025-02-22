@@ -37,12 +37,12 @@ def is_graph_coloring_valid(g: Graph) -> bool:
 
 
 def graph_color_brute_force(g: Graph, num_colors: int) -> bool:
-    """Perform a brute force iterative search for a graph coloring.
+    """Perform a brute-force iterative search for a graph coloring.
 
     Parameters
     ----------
     g : Graph
-        The input graph. This nodes' labels are modified to capture the result.
+        The input graph. The nodes' labels are modified in-place to capture the result.
     num_colors : int
         The maximum number of colors to use.
 
@@ -98,7 +98,7 @@ def graph_color_greedy(g: Graph) -> bool:
     Parameters
     ----------
     g : Graph
-        The input graph. This nodes' labels are modified to capture the result.
+        The input graph. The nodes' labels are modified in-place to capture the result.
 
     Returns
     -------
@@ -111,12 +111,12 @@ def graph_color_greedy(g: Graph) -> bool:
 
 
 def graph_color_dfs(g: Graph, num_colors: int, index: int = 0) -> bool:
-    """Perform a brute force DFS for a graph coloring.
+    """Perform an exhaustive DFS for a graph coloring.
 
     Parameters
     ----------
     g : Graph
-        The input graph. This nodes' labels are modified to capture the result.
+        The input graph. The nodes' labels are modified in-place to capture the result.
     num_colors : int
         The maximum number of colors to use.
     index : int
@@ -145,7 +145,7 @@ def graph_color_dfs_pruning(g: Graph, num_colors: int, index: int = 0) -> bool:
     Parameters
     ----------
     g : Graph
-        The input graph. This nodes' labels are modified to capture the result.
+        The input graph. The nodes' labels are modified in-place to capture the result.
     num_colors : int
         The maximum number of colors to use.
     index : int
@@ -181,7 +181,7 @@ def graph_color_removal(g: Graph, num_colors: int) -> bool:
     Parameters
     ----------
     g : Graph
-        The input graph. This nodes' labels are modified to capture the result.
+        The input graph. The nodes' labels are modified in-place to capture the result.
     num_colors : int
         The maximum number of colors to use.
 

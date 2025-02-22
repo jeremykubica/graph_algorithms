@@ -50,7 +50,7 @@ def get_reachable(g: Graph, index: int) -> set:
 
 
 def check_strongly_connected(g: Graph, inds: list) -> bool:
-    """A brute force check if a list of nodes are strongly connected.
+    """A brute-force check if a list of nodes are strongly connected.
 
     Parameters
     ----------
@@ -84,7 +84,7 @@ def add_reachable(g: Graph, index: int, seen: list, reachable: list):
     seen : list of bool
         Whether each node in the graph has been marked seen.
     reachable : int
-        The current list of reachable nodes' indices.
+        The current list of the reachable nodes' indices.
     """
     seen[index] = True
     current = g.nodes[index]
@@ -175,7 +175,7 @@ class DFSTreeStats:
 
 
 def bridge_finding_dfs(g: Graph, index: int, stats: DFSTreeStats, results: list):
-    """The recursive inner function for the bridge finding algorithm.
+    """The recursive function for the bridge finding algorithm.
 
     Parameters
     ----------
@@ -208,6 +208,7 @@ def find_bridges(g: Graph) -> list:
     Parameters
     ----------
     g : Graph
+        The input graph.
 
     Returns
     -------
@@ -254,7 +255,7 @@ def find_bridges_exh(g: Graph) -> list:
 
 
 def articulation_point_dfs(g: Graph, index: int, stats: DFSTreeStats, results: set):
-    """The recursive inner function for the articulation point finding algorithm.
+    """The recursive function for the articulation point finding algorithm.
 
     Parameters
     ----------
@@ -283,14 +284,14 @@ def articulation_point_dfs(g: Graph, index: int, stats: DFSTreeStats, results: s
 
 
 def articulation_point_root(g: Graph, root: int, stats: DFSTreeStats, results: set):
-    """The inner function for the articulation point finding algorithm from the root node.
+    """The inner function for the articulation point finding algorithm at the root node.
 
     Parameters
     ----------
     g : Graph
         The input graph.
-    index : int
-        The index of the current node.
+    root : int
+        The index of the root node.
     stats : DFSTreeStats
         The statistics from the search so far.
     results : set of int
@@ -316,6 +317,7 @@ def find_articulation_points(g: Graph) -> set:
     Parameters
     ----------
     g : Graph
+        The input graph.
 
     Returns
     -------
