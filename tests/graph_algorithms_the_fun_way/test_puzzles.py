@@ -40,7 +40,7 @@ class TestPuzzles(unittest.TestCase):
         self.assertTrue(True)
 
     def test_heuristic(self):
-        """Test the generation of a heuristic and solving the puzzle with A*."""
+        """Test the generation of the heuristic values and solving the puzzle with A*."""
         g: Graph = create_prisoners_and_guards()
         h: list = pg_generate_heuristic(g)
         true_dist = [11, 12, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 0, 1]

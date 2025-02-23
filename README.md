@@ -4,11 +4,11 @@
 [![Template](https://img.shields.io/badge/Template-LINCC%20Frameworks%20Python%20Project%20Template-brightgreen)](https://lincc-ppt.readthedocs.io/en/latest/)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jeremykubica/graph_algorithms/smoke-test.yml)](https://github.com/jeremykubica/graph_algorithms/actions/workflows/smoke-test.yml)
 
-Code from Graph Algorithms the Fun Way by Jeremy Kubica (No Starch Press 2024).
+Code from the book _Graph Algorithms the Fun Way_ by Jeremy Kubica (No Starch Press 2024).
 
 This code is provided for illustration purposes only. The code written to match the explanations in the book
 and is NOT fully optimized and does not include all the validity checks that I would normally recommend
-in production code. It is posted here so readers can explore the algorithms and teachers can use the code in their classes.
+in production code. It is posted here so readers can explore the algorithms and teachers can use the code in their classes.  The book provides more detail into the thinking behind the algorithms and why the code is structured the way it is.
 
 This project was automatically generated using the LINCC-Frameworks 
 [python-project-template](https://github.com/lincc-frameworks/python-project-template). For more information about the project template see the 

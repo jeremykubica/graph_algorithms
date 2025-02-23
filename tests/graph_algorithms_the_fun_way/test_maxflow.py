@@ -540,7 +540,7 @@ class TestMaxFlow(unittest.TestCase):
         self.assertEqual(g2.compute_total_flow(), 10)
 
     def test_edmonds_karp_I(self):
-        """Test the DFS Edmonds-Karp implementation."""
+        """Test the Edmonds-Karp implementation."""
         g = Graph(5)
         g.insert_edge(0, 1, 3)
         g.insert_edge(0, 2, 3)

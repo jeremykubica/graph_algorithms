@@ -6,7 +6,7 @@ from graph_algorithms_the_fun_way.shortest_path import *
 
 class TestShortestPath(unittest.TestCase):
     def test_dijkstras_3a(self):
-        """Test Dijkstras algorithm on a test graph."""
+        """Test Dijkstra's algorithm on a sample graph."""
         g = Graph(3, undirected=False)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 2, 0.5)
@@ -19,7 +19,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[2], 0)
 
     def test_bellmanford_3a(self):
-        """Test the Bellman-Ford algorithm on a test graph."""
+        """Test the Bellman-Ford algorithm on a sample graph."""
         g = Graph(3, undirected=False)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 2, 0.5)
@@ -32,7 +32,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[2], 0)
 
     def test_dijkstras_3b(self):
-        """Test Dijkstras algorithm on a test graph."""
+        """Test Dijkstras algorithm on a sample graph."""
         g = Graph(3, undirected=False)
         g.insert_edge(0, 1, 2.0)
         g.insert_edge(0, 2, 0.5)
@@ -45,7 +45,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[2], 0)
 
     def test_bellmanford_3b(self):
-        """Test the Bellman-Ford algorithm on a test graph."""
+        """Test the Bellman-Ford algorithm on a sample graph."""
         g = Graph(3, undirected=False)
         g.insert_edge(0, 1, 2.0)
         g.insert_edge(0, 2, 0.5)
@@ -71,7 +71,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[2], -1)
 
     def test_dijkstras_5(self):
-        """Test Dijkstras algorithm on a test graph."""
+        """Test Dijkstra's algorithm on a sample graph."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 0.5)
         g.insert_edge(0, 2, 1.0)
@@ -107,7 +107,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[4], 2)
 
     def test_bellmanford_5(self):
-        """Test the Bellman-Ford algorithm on a test graph."""
+        """Test the Bellman-Ford algorithm on a sample graph."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 0.5)
         g.insert_edge(0, 2, 1.0)
@@ -143,6 +143,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[4], 2)
 
     def test_dijkstras_5_star(self):
+        """Test Dijkstra's algorithm on a sample graph."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 3.5)
         g.insert_edge(0, 2, 0.5)
@@ -171,7 +172,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[4], -1)
 
     def test_bellmanford_5_star(self):
-        """Test the Bellman-Ford algorithm on a test graph."""
+        """Test the Bellman-Ford algorithm on a sample graph."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 3.5)
         g.insert_edge(0, 2, 0.5)
@@ -200,7 +201,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[4], -1)
 
     def test_bellmanford_4_negA(self):
-        """Test the Bellman-Ford algorithm on a test graph with a negative edge."""
+        """Test the Bellman-Ford algorithm on a graph with a negative edge."""
         g = Graph(4, undirected=False)
         g.insert_edge(0, 1, 2.0)
         g.insert_edge(0, 2, 1.0)
@@ -216,7 +217,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[3], 2)
 
     def test_bellmanford_4_negB(self):
-        """Test the Bellman-Ford algorithm on a test graph with a negative loop."""
+        """Test the Bellman-Ford algorithm on a graph with a negative loop."""
         g = Graph(4, undirected=False)
         g.insert_edge(0, 1, 2.0)
         g.insert_edge(0, 2, 1.0)
@@ -228,7 +229,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last, None)
 
     def test_bellmanford_5_neg(self):
-        """Test the Bellman-Ford algorithm on a test graph with a negative loop."""
+        """Test the Bellman-Ford algorithm on a graph with a negative loop."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 2.0)
         g.insert_edge(1, 2, 1.0)
@@ -240,7 +241,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last, None)
 
     def test_dijkstras_disconnected(self):
-        """Test Dijkstras algorithm on a disconnected graph."""
+        """Test Dijkstra's algorithm on a disconnected graph."""
         g = Graph(4, undirected=False)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(2, 3, 1.0)
@@ -254,7 +255,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[3], -1)
 
     def test_floyd_warshall_4(self):
-        """Test the Floyd-Warshall algorithm on a test graph from Figure 7-10."""
+        """Test the Floyd-Warshall algorithm on the graph from Figure 7-10."""
         g = Graph(4, undirected=False)
         g.insert_edge(0, 1, 10.0)
         g.insert_edge(0, 2, 1.0)
@@ -285,7 +286,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[3][0], -1)
 
     def test_floyd_warshall_5(self):
-        """Test the Floyd-Warshall algorithm on a test graph from Figure 7-13."""
+        """Test the Floyd-Warshall algorithm on the graph from Figure 7-13."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 5.0)
         g.insert_edge(0, 3, 3.0)
@@ -333,7 +334,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[4][4], -1)
 
     def test_floyd_warshall_5b(self):
-        """Test the Floyd-Warshall algorithm on a test graph."""
+        """Test the Floyd-Warshall algorithm on a sample graph."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 0.5)
         g.insert_edge(0, 2, 1.0)
@@ -380,7 +381,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[4][4], -1)
 
     def test_floyd_warshall_5c(self):
-        """Test the Floyd-Warshall algorithm on a test graph."""
+        """Test the Floyd-Warshall algorithm on a sample graph."""
         g = Graph(5, undirected=False)
         g.insert_edge(0, 1, 3.5)
         g.insert_edge(0, 2, 0.5)
@@ -425,7 +426,7 @@ class TestShortestPath(unittest.TestCase):
         self.assertEqual(last[4][4], -1)
 
     def test_floyd_warshall_9(self):
-        """Test the Floyd-Warshall algorithm on a test graph."""
+        """Test the Floyd-Warshall algorithm on a sample graph."""
         g = Graph(9, undirected=False)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 1, 1.0)

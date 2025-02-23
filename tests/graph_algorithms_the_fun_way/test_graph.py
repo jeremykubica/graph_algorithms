@@ -35,7 +35,7 @@ class TestGraph(unittest.TestCase):
         g.insert_edge(3, 1, 1.0)
         self.assertTrue(g.is_valid())
 
-        # Check that the correct edge are there.
+        # Check that the correct edges are there.
         self.assertTrue(g.is_edge(0, 1))
         self.assertTrue(g.is_edge(1, 0))
         self.assertTrue(g.is_edge(1, 2))
@@ -73,7 +73,7 @@ class TestGraph(unittest.TestCase):
         g.insert_edge(3, 1, 1.0)
         self.assertTrue(g.is_valid())
 
-        # Check that the correct edge are there.
+        # Check that the correct edges are there.
         self.assertTrue(g.is_edge(0, 1))
         self.assertTrue(g.is_edge(1, 2))
         self.assertTrue(g.is_edge(2, 3))
@@ -99,7 +99,7 @@ class TestGraph(unittest.TestCase):
         g.insert_edge(3, 1, -1.0)
         self.assertTrue(g.is_valid())
 
-        # Check that the correct edge are there.
+        # Check that the correct edges are there.
         self.assertAlmostEqual(g.get_edge(0, 1).weight, 0.5)
         self.assertAlmostEqual(g.get_edge(1, 2).weight, 2.0)
         self.assertAlmostEqual(g.get_edge(2, 3).weight, 1.0)
@@ -125,7 +125,7 @@ class TestGraph(unittest.TestCase):
         g.insert_edge(3, 1, -1.0)
         self.assertTrue(g.is_valid())
 
-        # Check that the correct edge are there.
+        # Check that the correct edges are there.
         self.assertAlmostEqual(g.get_edge(0, 1).weight, 0.5)
         self.assertAlmostEqual(g.get_edge(1, 2).weight, 2.0)
         self.assertAlmostEqual(g.get_edge(2, 3).weight, 1.0)
@@ -156,7 +156,7 @@ class TestGraph(unittest.TestCase):
         g.insert_edge(3, 1, 1.0)
         self.assertTrue(g.is_valid())
 
-        # Check that the correct edge are there.
+        # Check that the correct edges are there.
         self.assertTrue(g.is_edge(0, 1))
         self.assertTrue(g.is_edge(1, 0))
         self.assertTrue(g.is_edge(1, 2))
@@ -178,7 +178,7 @@ class TestGraph(unittest.TestCase):
         self.assertFalse(g.is_edge(3, 0))
         self.assertFalse(g.is_edge(0, 3))
 
-        # Check that the rest of the edges are still there
+        # Check that the rest of the edges are still there.
         self.assertTrue(g.is_edge(0, 1))
         self.assertTrue(g.is_edge(1, 0))
         self.assertTrue(g.is_edge(2, 3))
@@ -233,7 +233,7 @@ class TestGraph(unittest.TestCase):
         self.assertTrue(g.is_same_structure(g2))
         self.assertTrue(g2.is_same_structure(g))
 
-        # Check that the correct edge are there.
+        # Check that the correct edges are there.
         self.assertAlmostEqual(g2.get_edge(0, 1).weight, 0.5)
         self.assertAlmostEqual(g2.get_edge(1, 2).weight, 2.0)
         self.assertAlmostEqual(g2.get_edge(2, 3).weight, 1.0)
@@ -262,7 +262,7 @@ class TestGraph(unittest.TestCase):
         self.assertTrue(g.is_same_structure(g2))
         self.assertTrue(g2.is_same_structure(g))
 
-        # Check that the correct edge are there.
+        # Check that the correct edges are there.
         self.assertTrue(g2.is_edge(0, 1))
         self.assertTrue(g2.is_edge(1, 0))
         self.assertTrue(g2.is_edge(1, 2))

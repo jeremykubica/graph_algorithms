@@ -13,7 +13,7 @@ def _build_node_occurrence_hist(num_nodes: int, walk: list) -> list:
     num_nodes : int
         The total number of nodes
     walk : list
-        The nodes visited on the walk.
+        The nodes visited on the walk (listed by index).
 
     Returns
     -------
@@ -101,7 +101,7 @@ class TestMarkovGraph(unittest.TestCase):
         self.assertFalse(is_valid_probability_graph(self.g4))
 
     def test_choose_next_node(self):
-        """Check we can sample fthe next node."""
+        """Check that we can sample the next node."""
         hist0 = self._next_step_hist(self.g4, 0, 1000)
         self.assertEqual(hist0[0], 0)
         self.assertTrue(450 < hist0[1] < 550)

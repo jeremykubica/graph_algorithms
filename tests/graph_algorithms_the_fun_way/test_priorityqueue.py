@@ -106,7 +106,7 @@ class TestPriorityQueue(unittest.TestCase):
 
     def test_enqueue_3(self):
         """Third test case for inserting values into a max heap.
-        Inserts value in decreasing order."""
+        Inserts values in decreasing order."""
         pq = PriorityQueue(10)
         arr = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0]
         for i in range(len(arr)):
@@ -120,7 +120,7 @@ class TestPriorityQueue(unittest.TestCase):
 
     def test_enqueue_min_3(self):
         """Third test case for inserting values into a min heap.
-        Inserts value in decreasing order."""
+        Inserts values in decreasing order."""
         pq = PriorityQueue(10, min_heap=True)
         arr = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0]
         for i in range(len(arr)):

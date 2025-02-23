@@ -98,7 +98,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(last_path_length(path, 9, goal=0), 3)
 
     def test_bfs_figure5_3(self):
-        """Test BFS on a graph from Figure 5.3."""
+        """Test BFS on a graph from Figure 5-3."""
         g = Graph(3, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 2, 10.0)
@@ -265,7 +265,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(path, [-1, 0, 1, 2, 2, 8, 5, 8, 9, 4])
 
     def test_greedy_simple(self):
-        """Test greedy search on a simple graph for 4 nodes."""
+        """Test greedy search on a simple graph with 4 nodes."""
         g = Graph(4, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 2, 1.0)
@@ -293,7 +293,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(last, [-1, 0, 0, 0, 2, 6, 4])
 
     def test_astar_simple(self):
-        """Test A* search on a simple graph for 4 nodes."""
+        """Test A* search on a simple graph with 4 nodes."""
         g = Graph(4, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 2, 1.0)
@@ -421,7 +421,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(dfs_connected_components(g), [0, 0, 0, 1, 0, 0, 0, 1])
 
     def test_figure_11_7(self):
-        """Test the preorder list in figure 11-7."""
+        """Test the preorder list in Figure 11-7."""
         g = Graph(7, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 2, 1.0)
@@ -437,7 +437,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(parents, [-1, 0, 1, 0, 2, 3, 1])
 
     def test_figure_11_8(self):
-        """Test the preorder list in figure 11-8."""
+        """Test the preorder list in Figure 11-8."""
         g = Graph(7, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 3, 1.0)
@@ -452,7 +452,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(parents, [-1, 0, 1, 0, 2, 3, 1])
 
     def test_figure_11_10(self):
-        """Test the preorder list in figure 11-10."""
+        """Test the preorder list in Figure 11-10."""
         g = Graph(8, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 4, 1.0)
@@ -468,7 +468,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(parents, [-1, 0, 1, 2, 1, 4, 7, 3])
 
     def test_figure_11_11(self):
-        """Test the preorder list in figure 11-11."""
+        """Test the preorder list in Figure 11-11."""
         g = Graph(7, undirected=True)
         g.insert_edge(0, 1, 1.0)
         g.insert_edge(0, 3, 1.0)

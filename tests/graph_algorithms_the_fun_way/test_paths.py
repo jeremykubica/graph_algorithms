@@ -407,7 +407,7 @@ class TestGrapPaths(unittest.TestCase):
         self.assertEqual(res, [2, 1, 0, 3, 4])
 
     def test_hamilton_dfs_5c(self):
-        """Test a DFS to find Hamiltonian paths on Figure 18-4."""
+        """Test a DFS to find Hamiltonian paths in Figure 18-4."""
         g5 = Graph(5, undirected=False)
         g5.insert_edge(0, 1, 1.0)
         g5.insert_edge(1, 0, 1.0)
