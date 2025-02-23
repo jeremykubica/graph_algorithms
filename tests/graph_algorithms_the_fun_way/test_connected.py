@@ -503,7 +503,7 @@ class TestGraphConnected(unittest.TestCase):
         res = find_articulation_points(g)
         self.assertEqual(len(res), 0)
 
-        # Self-edge is not a AP
+        # Self-edge does not make an articulation point
         g.insert_edge(0, 0, 1.0)
         res = find_articulation_points(g)
         self.assertEqual(len(res), 0)
