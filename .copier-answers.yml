@@ -19,6 +19,8 @@ project_license: MIT
 project_name: graph_algorithms_the_fun_way
 project_organization: jeremykubica
 python_versions:
-- '3.9'
-- '3.10'
 - '3.11'
+- '3.12'
+- '3.13'
+- '3.14'
+test_lowest_version: none
