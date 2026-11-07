@@ -37,7 +37,7 @@ jobs:
       run: |
         sudo apt-get update
     - name: Run unit tests with unittest
-        uv pip install --system -e .[dev]
+        uv pip install -e .
         if [ -f requirements.txt ]; then uv pip install --system -r requirements.txt; fi
       run: |
         cd tests/graph_algorithms_the_fun_way
