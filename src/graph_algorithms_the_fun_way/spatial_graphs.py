@@ -14,7 +14,6 @@ import math
 from graph_algorithms_the_fun_way.union_find import UnionFind
 from graph_algorithms_the_fun_way.graph import Graph
 
-
 # -------------------------------------------------------
 # --- Spatial Graph Construction ------------------------
 # -------------------------------------------------------

@@ -15,7 +15,6 @@ from typing import Union
 from graph_algorithms_the_fun_way.graph import Edge, Graph
 from graph_algorithms_the_fun_way.search import dfs_connected_components
 
-
 # -------------------------------------------------------
 # --- Basic Path Metrics --------------------------------
 # -------------------------------------------------------
