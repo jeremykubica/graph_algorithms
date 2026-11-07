@@ -9,21 +9,27 @@ on:
 
   # Runs this workflow automatically
   schedule:
-    - cron: 45 6 * * *
-    
+    - cron: 45 6 * * 1-5
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+permissions: {}
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
         python-version: ['3.11', '3.12', '3.13', '3.14']
 
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      with:
+        persist-credentials: false
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v7
       with:
@@ -34,6 +40,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -e .[dev]
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        uv pip install --system -e .[dev]
+        if [ -f requirements.txt ]; then uv pip install --system -r requirements.txt; fi
     - name: List dependencies
       run: |
         pip list

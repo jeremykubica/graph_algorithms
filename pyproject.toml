@@ -1,14 +1,14 @@
 
 [project]
 name = "graph_algorithms_the_fun_way"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 readme = "README.md"
 authors = [
     { name = "Jeremy Kubica", email = "computationaltales@gmail.com" }
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Operating System :: OS Independent",
@@ -46,10 +46,11 @@ write_to = "src/graph_algorithms_the_fun_way/_version.py"
 testpaths = [
     "tests",
 ]
+addopts = "--doctest-modules --doctest-glob=*.rst"
+log_cli_level = "INFO"
 
 [tool.black]
 line-length = 110
-target-version = ["py39"]
 
 [tool.isort]
 profile = "black"
